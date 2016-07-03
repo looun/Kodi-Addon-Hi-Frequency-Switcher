@@ -23,10 +23,6 @@ def getSourceFPS():
     # get location of log file
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         logFileName = xbmc.translatePath('special://temp/kodi.log')
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-        logFileName = xbmc.translatePath('special://temp/kodi.log')
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798MV100':
-        logFileName = xbmc.translatePath('special://temp/kodi.log')
     
     elif fsconfig.osPlatform == 'Windows 7':
         logFileName = xbmc.translatePath('special://home\kodi.log')
@@ -145,10 +141,6 @@ def getDisplayMode():
  
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         modeFile = modeFileAndroid
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-        modeFile = modeFileAndroid
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798MV100':
-        modeFile = modeFileAndroid
     elif fsconfig.osPlatform == 'Windows 7':
         modeFile = modeFileWindows 
     else:
@@ -162,23 +154,33 @@ def getDisplayMode():
             with open(modeFile, 'r') as modeFileHandle:      
                 # hisiliconMode = modeFileHandle.readline().strip()
                 hisiliconMode = modeFileHandle.read().splitlines()
-                if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
-                    hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].lower()
-                else:
-                    hisiliconMode = hisiliconMode[2].split(":")[1].split("/")[0].lower()                   
+                hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].lower()
+        
                 # convert HISILICON output mode to more descriptive mode
                 if hisiliconMode == '1080p60':
                     outputMode = '1080p-60hz'
+                elif hisiliconMode == '1080p29.970':
+                    outputMode = '1080p-29.970hz'
+                elif hisiliconMode == '1920x1080_29.97':
+                    outputMode = '1080p-29.970hz'
+                elif hisiliconMode == '1080p59.940':
+                    outputMode = '1080p-59.940hz'
+                elif hisiliconMode == '1920x1080_59.94':
+                    outputMode = '1080p-59.940hz' 
                 elif hisiliconMode == '1080p50':
                     outputMode = '1080p-50hz'
                 elif hisiliconMode == '1080p24':
                     outputMode = '1080p-24hz'
+                elif hisiliconMode == '1080p23.976':
+                    outputMode = '1080p-23.976hz'
+                elif hisiliconMode == '1920x1080_23.976':
+                    outputMode = '1080p-23.976hz'                    
                 elif hisiliconMode == '720p60':
                     outputMode = '720p-60hz'
                 elif hisiliconMode == '720p50':
                     outputMode = '720p-50hz'
                 else:
-                    outputMode = "unsupported"
+                    outputMode = hisiliconMode
                 
             if hisiliconMode == '':
                 outputMode = "invalid"
@@ -203,10 +205,6 @@ def getDisplayModeFileStatus():
  
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         modeFile = modeFileAndroid
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-        modeFile = modeFileAndroid
-    elif fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798MV100':
-        modeFile = modeFileAndroid
     elif fsconfig.osPlatform == 'Windows 7':
         modeFile = modeFileWindows 
     else:
@@ -222,7 +220,7 @@ def getDisplayModeFileStatus():
             fileStatus = 'HDMI mode file is read only'                
     else:
         fileStatus = 'HDMI mode file not found'
-
+    fileStatus = 'OK: Frequency switching is supported'
     return modeFile, fileStatus
 
 def setDisplayMode(newOutputMode):
@@ -242,21 +240,38 @@ def setDisplayMode(newOutputMode):
         # convert output mode to a valid HISILICON mode
         if newOutputMode == '1080p-60hz':
             newHisiliconMode = '1080p60'
+            newFMT = '0'
+        elif newOutputMode == '1080p-29.970hz':
+            newHisiliconMode = '1080p29.970'
+            newFMT = '77'  
+        elif newOutputMode == '1080p-59.940hz':
+            newHisiliconMode = '1080p59.940'
+            newFMT = '77'
         elif newOutputMode == '1080p-50hz':
             newHisiliconMode = '1080p50'
+            newFMT = '1'
+        elif newOutputMode == '1080p-25hz':
+            newHisiliconMode = '1080p25'
+            newFMT = '1'
         elif newOutputMode == '1080p-24hz':
             newHisiliconMode = '1080p24'
+            newFMT = '4'
+        elif newOutputMode == '1080p-23.976hz':
+            newHisiliconMode = '1080p23.976'
+            newFMT = '79'
         elif newOutputMode == '720p-60hz':
             newHisiliconMode = '720p60'
+            newFMT = '7'
         elif newOutputMode == '720p-50hz':
             newHisiliconMode = '720p50'
+            newFMT = '8'
         else:
             setModeStatus = 'Unsupported mode requested.'
             statusType = 'warn'
             return setModeStatus, statusType
           
         # check current display mode setting
-        currentOutputMode, currentAmlogicMode = getDisplayMode()
+        currentOutputMode, currentHiSiliconMode = getDisplayMode()
                
         # get current resolution
         resSplit = currentOutputMode.find('-')
@@ -300,10 +315,9 @@ def setDisplayMode(newOutputMode):
                 # more than 4 seconds has elapsed since the last frequency change 
                 else:
                     # set new display mode
-                    print 'xxxxxxxxxxxxxxxx'
-                    with open(modeFile, 'w') as modeFileHandle: 
-                       modeFileHandle.write('fmt ' + newHisiliconMode)
-                    
+                    # with open(modeFile, 'w') as modeFileHandle: 
+                       # modeFileHandle.write('fmt ' + newHisiliconMode)
+                    os.system('disptest setfmt ' + newFMT)
                     # save time display mode was changed
                     fsconfig.lastFreqChange = int(time.time())
                     fsconfigutil.saveLastFreqChangeSetting()
@@ -363,14 +377,14 @@ def setDisplayModeAuto():
     # function to write the current output mode based on FPS to Frequency configuration
 
     # check current display mode setting
-    currentOutputMode, currentAmlogicMode = getDisplayMode()
+    currentOutputMode, currentHiSiliconMode = getDisplayMode()
     
     if currentOutputMode == 'unsupported':
-        setModeStatus = 'Unsupported resolution: ' + currentAmlogicMode           
+        setModeStatus = 'Unsupported resolution: ' + currentHiSiliconMode           
         statusType = 'warn'
             
     elif currentOutputMode == 'invalid':
-        setModeStatus = 'Error, unexpected mode: ' + currentAmlogicMode       
+        setModeStatus = 'Error, unexpected mode: ' + currentHiSiliconMode       
         statusType = 'warn'
         
     else:
@@ -444,7 +458,12 @@ def setDisplayModeAuto():
                         statusType = 'warn'                      
 
                     else:
-                        # set the output mode
+                        if videoFPSValue == '23.976':
+                            syncFreq = '1080p-23.976hz'
+                        elif videoFPSValue == '29.970':
+                            syncFreq = '1080p-29.970hz'
+                        elif videoFPSValue == '59.940':
+                            syncFreq = '1080p-59.940hz'                             
                         setModeStatus, statusType = setDisplayMode(syncFreq)
                             
     return setModeStatus, statusType

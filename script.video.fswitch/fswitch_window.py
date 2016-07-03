@@ -1097,12 +1097,6 @@ class MainWindow(AddonDialogWindow):
             fsconfig.osPlatform = 'unknown'
             self.disableAll()
             
-        elif osVariant == 'HiSTBAndroidV5 Hi3798CV100':
-            self.labelInfoTitle.setLabel(osVariant)
-            fsconfig.osPlatform = osVariant
-        elif osVariant == 'HiSTBAndroidV5 Hi3798MV100':
-            self.labelInfoTitle.setLabel(osVariant)
-            fsconfig.osPlatform = osVariant
         elif osVariant == 'HiSTBAndroidV6 Hi3798CV200':
             self.labelInfoTitle.setLabel(osVariant)
             fsconfig.osPlatform = osVariant
