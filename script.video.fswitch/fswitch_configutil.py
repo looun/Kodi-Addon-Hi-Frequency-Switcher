@@ -210,7 +210,7 @@ def resetAutoSyncSettingsFile():
     
     fsSettings['edit60hzFps1'] = '59.940'
     fsSettings['edit60hzFps2'] = '29.970'
-    fsSettings['edit60hzFps3'] = ''
+    fsSettings['edit60hzFps3'] = '60'
     fsSettings['edit60hzFps4'] = ''
     
     fsSettings['edit50hzFps1'] = '50.000'

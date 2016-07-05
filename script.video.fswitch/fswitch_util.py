@@ -157,7 +157,21 @@ def getDisplayMode():
                 hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].lower()
         
                 # convert HISILICON output mode to more descriptive mode
-                if hisiliconMode == '1080p60':
+                if hisiliconMode == '3840x2160_60':
+                    outputMode = '2160p-60hz'
+                elif hisiliconMode == '3840x2160_30':
+                    outputMode = '2160p-30hz'
+                elif hisiliconMode == '3840x2160_29.97':
+                    outputMode = '2160p-29.970hz'
+                elif hisiliconMode == '3840x2160_50':
+                    outputMode = '2160p-50hz'
+                elif hisiliconMode == '3840x2160_25':
+                    outputMode = '2160p-25hz'
+                elif hisiliconMode == '3840x2160_24':
+                    outputMode = '2160p-24hz'
+                elif hisiliconMode == '3840x2160_23.976':
+                    outputMode = '2160p-23.976hz'
+                elif hisiliconMode == '1080p60':
                     outputMode = '1080p-60hz'
                 elif hisiliconMode == '1080p29.970':
                     outputMode = '1080p-29.970hz'
@@ -166,7 +180,7 @@ def getDisplayMode():
                 elif hisiliconMode == '1080p59.940':
                     outputMode = '1080p-59.940hz'
                 elif hisiliconMode == '1920x1080_59.94':
-                    outputMode = '1080p-59.940hz' 
+                    outputMode = '1080p-59.940hz'
                 elif hisiliconMode == '1080p50':
                     outputMode = '1080p-50hz'
                 elif hisiliconMode == '1080p24':
@@ -259,9 +273,30 @@ def setDisplayMode(newOutputMode):
         elif newOutputMode == '1080p-23.976hz':
             newHisiliconMode = '1080p23.976'
             newFMT = '79'
+        elif newOutputMode == '2160p-60hz':
+            newHisiliconMode = '2160p60'
+            newFMT = '68'
+        elif newOutputMode == '2160-29.970hz':
+            newHisiliconMode = '2160p29.970'
+            newFMT = '75'  
+        elif newOutputMode == '2160p-59.940hz':
+            newHisiliconMode = '2160p59.940'
+            newFMT = '68'
+        elif newOutputMode == '2160p-50hz':
+            newHisiliconMode = '2160p50'
+            newFMT = '67'
+        elif newOutputMode == '2160p-25hz':
+            newHisiliconMode = '2160p25'
+            newFMT = '65'
+        elif newOutputMode == '2160p-24hz':
+            newHisiliconMode = '2160p24'
+            newFMT = '64'
+        elif newOutputMode == '2160p-23.976hz':
+            newHisiliconMode = '2160p23.976'
+            newFMT = '74'
         elif newOutputMode == '720p-60hz':
             newHisiliconMode = '720p60'
-            newFMT = '7'
+            newFMT = '7'            
         elif newOutputMode == '720p-50hz':
             newHisiliconMode = '720p50'
             newFMT = '8'
@@ -459,11 +494,20 @@ def setDisplayModeAuto():
 
                     else:
                         if videoFPSValue == '23.976':
-                            syncFreq = '1080p-23.976hz'
+                            if currentRes == '1080p':
+                                syncFreq = '1080p-23.976hz'
+                            elif currentRes == '2160p':
+                                syncFreq = '2160p-23.976hz'
                         elif videoFPSValue == '29.970':
-                            syncFreq = '1080p-29.970hz'
+                            if currentRes == '1080p':
+                                syncFreq = '1080p-29.970hz'
+                            elif currentRes == '2160p':                            
+                                syncFreq = '2160p-29.970hz'
                         elif videoFPSValue == '59.940':
-                            syncFreq = '1080p-59.940hz'                             
+                            if currentRes == '1080p':
+                                syncFreq = '1080p-59.940hz'
+                            elif currentRes == '2160p': 
+                                syncFreq = '2160p-59.940hz'                             
                         setModeStatus, statusType = setDisplayMode(syncFreq)
                             
     return setModeStatus, statusType
