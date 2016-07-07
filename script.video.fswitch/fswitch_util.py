@@ -23,7 +23,10 @@ def getSourceFPS():
     # get location of log file
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         logFileName = xbmc.translatePath('special://temp/kodi.log')
-    
+        if os.access(logFileName, os.R_OK):
+            logFileName = xbmc.translatePath('special://temp/kodi.log')            
+        else:    
+            logFileName = xbmc.translatePath('special://temp/spmc.log') 
     elif fsconfig.osPlatform == 'Windows 7':
         logFileName = xbmc.translatePath('special://home\kodi.log')
     
@@ -276,7 +279,7 @@ def setDisplayMode(newOutputMode):
         elif newOutputMode == '2160p-60hz':
             newHisiliconMode = '2160p60'
             newFMT = '68'
-        elif newOutputMode == '2160-29.970hz':
+        elif newOutputMode == '2160p-29.970hz':
             newHisiliconMode = '2160p29.970'
             newFMT = '75'  
         elif newOutputMode == '2160p-59.940hz':
