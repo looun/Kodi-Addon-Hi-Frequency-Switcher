@@ -123,20 +123,26 @@ def resetSettingsFile():
     
     # key mapping
     fsSettings['radio60hz'] = False
+    fsSettings['radio59hz'] = False
     fsSettings['radio50hz'] = False
     fsSettings['radio24hz'] = False
+    fsSettings['radio23hz'] = False
     fsSettings['radioAuto'] = False
     fsSettings['radioInfo'] = False
     
     fsSettings['key60hz'] = ''
+    fsSettings['key59hz'] = ''
     fsSettings['key50hz'] = ''
     fsSettings['key24hz'] = ''
+    fsSettings['key23hz'] = ''
     fsSettings['keyAuto'] = ''
     fsSettings['keyInfo'] = ''
     
     fsSettings['status60hz'] = ''
+    fsSettings['status59hz'] = ''
     fsSettings['status50hz'] = ''
     fsSettings['status24hz'] = ''
+    fsSettings['status23hz'] = ''
     fsSettings['statusAuto'] = ''
     fsSettings['statusInfo'] = ''
     
@@ -205,24 +211,37 @@ def resetAutoSyncSettingsFile():
     
     # auto-set configuration
     fsSettings['radioAuto60hz'] = True
+    fsSettings['radioAuto59hz'] = True
     fsSettings['radioAuto50hz'] = True
     fsSettings['radioAuto24hz'] = True
-    
-    fsSettings['edit60hzFps1'] = '59.940'
-    fsSettings['edit60hzFps2'] = '29.970'
-    fsSettings['edit60hzFps3'] = '60'
+    fsSettings['radioAuto23hz'] = True
+
+
+    fsSettings['edit60hzFps1'] = '60.000'
+    fsSettings['edit60hzFps2'] = '30.000'
+    fsSettings['edit60hzFps3'] = ''
     fsSettings['edit60hzFps4'] = ''
     
+    fsSettings['edit59hzFps1'] = '59.940'
+    fsSettings['edit59hzFps2'] = '29.970'
+    fsSettings['edit59hzFps3'] = ''
+    fsSettings['edit59hzFps4'] = ''
+
     fsSettings['edit50hzFps1'] = '50.000'
     fsSettings['edit50hzFps2'] = '25.000'
     fsSettings['edit50hzFps3'] = ''
     fsSettings['edit50hzFps4'] = ''
     
     fsSettings['edit24hzFps1'] = '24.000'
-    fsSettings['edit24hzFps2'] = '23.976'
+    fsSettings['edit24hzFps2'] = ''
     fsSettings['edit24hzFps3'] = ''
     fsSettings['edit24hzFps4'] = ''
     
+    fsSettings['edit23hzFps1'] = '23.976'
+    fsSettings['edit23hzFps2'] = ''
+    fsSettings['edit23hzFps3'] = ''
+    fsSettings['edit23hzFps4'] = ''
+
     # create or overwrite settings file
     try:
         with open(globalAutoSync, 'wb') as settingsFileHandle: 
@@ -271,20 +290,26 @@ def loadSettings():
 
             # key mapping
             fsconfig.radio60hz = fsSettings['radio60hz']
+            fsconfig.radio59hz = fsSettings['radio59hz']
             fsconfig.radio50hz = fsSettings['radio50hz']
             fsconfig.radio24hz = fsSettings['radio24hz']
+            fsconfig.radio23hz = fsSettings['radio23hz']
             fsconfig.radioAuto = fsSettings['radioAuto']
             fsconfig.radioInfo = fsSettings['radioInfo']
             
             fsconfig.key60hz = fsSettings['key60hz']
+            fsconfig.key59hz = fsSettings['key59hz']
             fsconfig.key50hz = fsSettings['key50hz']
             fsconfig.key24hz = fsSettings['key24hz']
+            fsconfig.key23hz = fsSettings['key23hz']
             fsconfig.keyAuto = fsSettings['keyAuto']
             fsconfig.keyInfo = fsSettings['keyInfo']
             
             fsconfig.status60hz = fsSettings['status60hz']
+            fsconfig.status59hz = fsSettings['status59hz']
             fsconfig.status50hz = fsSettings['status50hz']
             fsconfig.status24hz = fsSettings['status24hz']
+            fsconfig.status23hz = fsSettings['status23hz']
             fsconfig.statusAuto = fsSettings['statusAuto']
             fsconfig.statusInfo = fsSettings['statusInfo']
         
@@ -313,20 +338,26 @@ def saveSettings():
 
     # key mapping
     fsSettings['radio60hz'] = fsconfig.radio60hz
+    fsSettings['radio59hz'] = fsconfig.radio59hz
     fsSettings['radio50hz'] = fsconfig.radio50hz
     fsSettings['radio24hz'] = fsconfig.radio24hz
+    fsSettings['radio23hz'] = fsconfig.radio23hz
     fsSettings['radioAuto'] = fsconfig.radioAuto
     fsSettings['radioInfo'] = fsconfig.radioInfo
 
     fsSettings['key60hz'] = fsconfig.key60hz
+    fsSettings['key59hz'] = fsconfig.key59hz
     fsSettings['key50hz'] = fsconfig.key50hz
     fsSettings['key24hz'] = fsconfig.key24hz
+    fsSettings['key23hz'] = fsconfig.key23hz
     fsSettings['keyAuto'] = fsconfig.keyAuto
     fsSettings['keyInfo'] = fsconfig.keyInfo
     
     fsSettings['status60hz'] = fsconfig.status60hz
+    fsSettings['status59hz'] = fsconfig.status59hz
     fsSettings['status50hz'] = fsconfig.status50hz
     fsSettings['status24hz'] = fsconfig.status24hz
+    fsSettings['status23hz'] = fsconfig.status23hz
     fsSettings['statusAuto'] = fsconfig.statusAuto
     fsSettings['statusInfo'] = fsconfig.statusInfo
 
@@ -442,14 +473,21 @@ def loadAutoSyncSettings():
 
             # auto-set configuration
             fsconfig.radioAuto60hz = fsSettings['radioAuto60hz']
+            fsconfig.radioAuto59hz = fsSettings['radioAuto59hz']
             fsconfig.radioAuto50hz = fsSettings['radioAuto50hz']
             fsconfig.radioAuto24hz = fsSettings['radioAuto24hz']
+            fsconfig.radioAuto23hz = fsSettings['radioAuto23hz']
         
             fsconfig.edit60hzFps1 = fsSettings['edit60hzFps1']
             fsconfig.edit60hzFps2 = fsSettings['edit60hzFps2']
             fsconfig.edit60hzFps3 = fsSettings['edit60hzFps3']
             fsconfig.edit60hzFps4 = fsSettings['edit60hzFps4']
         
+            fsconfig.edit59hzFps1 = fsSettings['edit59hzFps1']
+            fsconfig.edit59hzFps2 = fsSettings['edit59hzFps2']
+            fsconfig.edit59hzFps3 = fsSettings['edit59hzFps3']
+            fsconfig.edit59hzFps4 = fsSettings['edit59hzFps4']
+
             fsconfig.edit50hzFps1 = fsSettings['edit50hzFps1']
             fsconfig.edit50hzFps2 = fsSettings['edit50hzFps2']
             fsconfig.edit50hzFps3 = fsSettings['edit50hzFps3']
@@ -460,6 +498,11 @@ def loadAutoSyncSettings():
             fsconfig.edit24hzFps3 = fsSettings['edit24hzFps3']
             fsconfig.edit24hzFps4 = fsSettings['edit24hzFps4']
                  
+            fsconfig.edit23hzFps1 = fsSettings['edit23hzFps1']
+            fsconfig.edit23hzFps2 = fsSettings['edit23hzFps2']
+            fsconfig.edit23hzFps3 = fsSettings['edit23hzFps3']
+            fsconfig.edit23hzFps4 = fsSettings['edit23hzFps4']
+
         loadSettingsStatus = 'Loaded auto sync settings'
     except Exception:
         loadSettingsStatus = 'Failed to load auto sync settings'
@@ -474,13 +517,20 @@ def saveAutoSyncSettings():
 
     # auto-set configuration
     fsSettings['radioAuto60hz'] = fsconfig.radioAuto60hz
+    fsSettings['radioAuto59hz'] = fsconfig.radioAuto59hz
     fsSettings['radioAuto50hz'] = fsconfig.radioAuto50hz
     fsSettings['radioAuto24hz'] = fsconfig.radioAuto24hz
+    fsSettings['radioAuto23hz'] = fsconfig.radioAuto23hz
 
     fsSettings['edit60hzFps1'] = fsconfig.edit60hzFps1
     fsSettings['edit60hzFps2'] = fsconfig.edit60hzFps2
     fsSettings['edit60hzFps3'] = fsconfig.edit60hzFps3
     fsSettings['edit60hzFps4'] = fsconfig.edit60hzFps4
+
+    fsSettings['edit59hzFps1'] = fsconfig.edit59hzFps1
+    fsSettings['edit59hzFps2'] = fsconfig.edit59hzFps2
+    fsSettings['edit59hzFps3'] = fsconfig.edit59hzFps3
+    fsSettings['edit59hzFps4'] = fsconfig.edit59hzFps4
 
     fsSettings['edit50hzFps1'] = fsconfig.edit50hzFps1
     fsSettings['edit50hzFps2'] = fsconfig.edit50hzFps2
@@ -491,6 +541,11 @@ def saveAutoSyncSettings():
     fsSettings['edit24hzFps2'] = fsconfig.edit24hzFps2
     fsSettings['edit24hzFps3'] = fsconfig.edit24hzFps3
     fsSettings['edit24hzFps4'] = fsconfig.edit24hzFps4
+
+    fsSettings['edit23hzFps1'] = fsconfig.edit23hzFps1
+    fsSettings['edit23hzFps2'] = fsconfig.edit23hzFps2
+    fsSettings['edit23hzFps3'] = fsconfig.edit23hzFps3
+    fsSettings['edit23hzFps4'] = fsconfig.edit23hzFps4
 
     # create or overwrite settings file
     try:

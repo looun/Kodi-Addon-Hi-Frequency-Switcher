@@ -23,10 +23,7 @@ def getSourceFPS():
     # get location of log file
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         logFileName = xbmc.translatePath('special://temp/kodi.log')
-        if os.access(logFileName, os.R_OK):
-            logFileName = xbmc.translatePath('special://temp/kodi.log')            
-        else:    
-            logFileName = xbmc.translatePath('special://temp/spmc.log') 
+    
     elif fsconfig.osPlatform == 'Windows 7':
         logFileName = xbmc.translatePath('special://home\kodi.log')
     
@@ -157,47 +154,41 @@ def getDisplayMode():
             with open(modeFile, 'r') as modeFileHandle:      
                 # hisiliconMode = modeFileHandle.readline().strip()
                 hisiliconMode = modeFileHandle.read().splitlines()
-                hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].lower()
-        
+                hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
+                print hisiliconMode 
                 # convert HISILICON output mode to more descriptive mode
-                if hisiliconMode == '3840x2160_60':
+                if hisiliconMode == '2160p60':
                     outputMode = '2160p-60hz'
-                elif hisiliconMode == '3840x2160_30':
+                elif hisiliconMode == '2160p30':
                     outputMode = '2160p-30hz'
-                elif hisiliconMode == '3840x2160_29.97':
-                    outputMode = '2160p-29.970hz'
-                elif hisiliconMode == '3840x2160_50':
+                elif hisiliconMode == '2160p29.97':
+                    outputMode = '2160p-29hz'
+                elif hisiliconMode == '2160p50':
                     outputMode = '2160p-50hz'
-                elif hisiliconMode == '3840x2160_25':
+                elif hisiliconMode == '2160p25':
                     outputMode = '2160p-25hz'
-                elif hisiliconMode == '3840x2160_24':
+                elif hisiliconMode == '2160p24':
                     outputMode = '2160p-24hz'
-                elif hisiliconMode == '3840x2160_23.976':
-                    outputMode = '2160p-23.976hz'
+                elif hisiliconMode == '2160p23.976':
+                    outputMode = '2160p-23hz'
                 elif hisiliconMode == '1080p60':
                     outputMode = '1080p-60hz'
-                elif hisiliconMode == '1080p29.970':
-                    outputMode = '1080p-29.970hz'
-                elif hisiliconMode == '1920x1080_29.97':
-                    outputMode = '1080p-29.970hz'
-                elif hisiliconMode == '1080p59.940':
-                    outputMode = '1080p-59.940hz'
-                elif hisiliconMode == '1920x1080_59.94':
-                    outputMode = '1080p-59.940hz'
+                elif hisiliconMode == '1080p59.94':
+                    outputMode = '1080p-59hz'
                 elif hisiliconMode == '1080p50':
                     outputMode = '1080p-50hz'
                 elif hisiliconMode == '1080p24':
                     outputMode = '1080p-24hz'
                 elif hisiliconMode == '1080p23.976':
-                    outputMode = '1080p-23.976hz'
-                elif hisiliconMode == '1920x1080_23.976':
-                    outputMode = '1080p-23.976hz'                    
+                    outputMode = '1080p-23hz'
                 elif hisiliconMode == '720p60':
                     outputMode = '720p-60hz'
+                elif hisiliconMode == '720p59.94':
+                    outputMode = '720p-59hz'
                 elif hisiliconMode == '720p50':
                     outputMode = '720p-50hz'
                 else:
-                    outputMode = hisiliconMode
+                    outputMode = "unsupported"
                 
             if hisiliconMode == '':
                 outputMode = "invalid"
@@ -231,13 +222,13 @@ def getDisplayModeFileStatus():
     # check file exists
     if os.path.isfile(modeFile):
         # check file is writable
-        if os.access(modeFile, os.W_OK):
-            fileStatus = 'OK: Frequency switching is supported'
-        else:
-            fileStatus = 'HDMI mode file is read only'                
+        # if os.access(modeFile, os.W_OK):
+        fileStatus = 'OK: Frequency switching is supported'
+        # else:
+            # fileStatus = 'HDMI mode file is read only'                
     else:
         fileStatus = 'HDMI mode file not found'
-    fileStatus = 'OK: Frequency switching is supported'
+
     return modeFile, fileStatus
 
 def setDisplayMode(newOutputMode):
@@ -258,31 +249,25 @@ def setDisplayMode(newOutputMode):
         if newOutputMode == '1080p-60hz':
             newHisiliconMode = '1080p60'
             newFMT = '0'
-        elif newOutputMode == '1080p-29.970hz':
-            newHisiliconMode = '1080p29.970'
-            newFMT = '77'  
-        elif newOutputMode == '1080p-59.940hz':
-            newHisiliconMode = '1080p59.940'
+        elif newOutputMode == '1080p-59hz':
+            newHisiliconMode = '1080p59.94'
             newFMT = '77'
         elif newOutputMode == '1080p-50hz':
             newHisiliconMode = '1080p50'
             newFMT = '1'
-        elif newOutputMode == '1080p-25hz':
-            newHisiliconMode = '1080p25'
-            newFMT = '1'
         elif newOutputMode == '1080p-24hz':
             newHisiliconMode = '1080p24'
             newFMT = '4'
-        elif newOutputMode == '1080p-23.976hz':
+        elif newOutputMode == '1080p-23hz':
             newHisiliconMode = '1080p23.976'
             newFMT = '79'
         elif newOutputMode == '2160p-60hz':
             newHisiliconMode = '2160p60'
             newFMT = '68'
-        elif newOutputMode == '2160p-29.970hz':
+        elif newOutputMode == '2160p-29hz':
             newHisiliconMode = '2160p29.970'
             newFMT = '75'  
-        elif newOutputMode == '2160p-59.940hz':
+        elif newOutputMode == '2160p-59hz':
             newHisiliconMode = '2160p59.940'
             newFMT = '68'
         elif newOutputMode == '2160p-50hz':
@@ -294,12 +279,15 @@ def setDisplayMode(newOutputMode):
         elif newOutputMode == '2160p-24hz':
             newHisiliconMode = '2160p24'
             newFMT = '64'
-        elif newOutputMode == '2160p-23.976hz':
+        elif newOutputMode == '2160p-23hz':
             newHisiliconMode = '2160p23.976'
             newFMT = '74'
         elif newOutputMode == '720p-60hz':
             newHisiliconMode = '720p60'
-            newFMT = '7'            
+            newFMT = '7'
+        elif newOutputMode == '720p-59hz':
+            newHisiliconMode = '720p59.94'
+            newFMT = '76'
         elif newOutputMode == '720p-50hz':
             newHisiliconMode = '720p50'
             newFMT = '8'
@@ -434,8 +422,10 @@ def setDisplayModeAuto():
         currentRes = currentOutputMode[0:resSplit]
             
         mode60hz = currentRes + '-60hz'
+        mode59hz = currentRes + '-59hz'
         mode50hz = currentRes + '-50hz'
         mode24hz = currentRes + '-24hz'
+        mode23hz = currentRes + '-23hz'
         
         autoSync = []
 
@@ -446,6 +436,12 @@ def setDisplayModeAuto():
                                (fsconfig.edit60hzFps3, mode60hz), 
                                (fsconfig.edit60hzFps4, mode60hz)])
 
+        if fsconfig.radioAuto59hz:
+            syncConfig.extend([(fsconfig.edit59hzFps1, mode59hz), 
+                               (fsconfig.edit59hzFps2, mode59hz), 
+                               (fsconfig.edit59hzFps3, mode59hz), 
+                               (fsconfig.edit59hzFps4, mode59hz)])
+             
         if fsconfig.radioAuto50hz:
             syncConfig.extend([(fsconfig.edit50hzFps1, mode50hz), 
                                (fsconfig.edit50hzFps2, mode50hz), 
@@ -458,6 +454,12 @@ def setDisplayModeAuto():
                                (fsconfig.edit24hzFps3, mode24hz),
                                (fsconfig.edit24hzFps4, mode24hz)])        
 
+        if fsconfig.radioAuto23hz:
+            syncConfig.extend([(fsconfig.edit23hzFps1, mode23hz), 
+                               (fsconfig.edit23hzFps2, mode23hz), 
+                               (fsconfig.edit23hzFps3, mode23hz), 
+                               (fsconfig.edit23hzFps4, mode23hz)])
+             
         # build auto sync list
         for (syncFPS, syncMode) in syncConfig:
             if syncFPS != '':
@@ -496,21 +498,7 @@ def setDisplayModeAuto():
                         statusType = 'warn'                      
 
                     else:
-                        if videoFPSValue == '23.976':
-                            if currentRes == '1080p':
-                                syncFreq = '1080p-23.976hz'
-                            elif currentRes == '2160p':
-                                syncFreq = '2160p-23.976hz'
-                        elif videoFPSValue == '29.970':
-                            if currentRes == '1080p':
-                                syncFreq = '1080p-29.970hz'
-                            elif currentRes == '2160p':                            
-                                syncFreq = '2160p-29.970hz'
-                        elif videoFPSValue == '59.940':
-                            if currentRes == '1080p':
-                                syncFreq = '1080p-59.940hz'
-                            elif currentRes == '2160p': 
-                                syncFreq = '2160p-59.940hz'                             
+                        # set the output mode
                         setModeStatus, statusType = setDisplayMode(syncFreq)
                             
     return setModeStatus, statusType

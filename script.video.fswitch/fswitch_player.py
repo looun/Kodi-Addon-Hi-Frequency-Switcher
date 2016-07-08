@@ -56,14 +56,14 @@ class fsPlayer(xbmc.Player):
             if fsconfig.radioOnPlayStop60 or fsconfig.radioOnPlayStop50:
 
                 # check current display mode setting
-                currentOutputMode, currentAmlogicMode = fsutil.getDisplayMode()
+                currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
                 
                 if currentOutputMode == 'unsupported':
-                    setModeStatus = 'Unsupported resolution: ' + currentAmlogicMode           
+                    setModeStatus = 'Unsupported resolution: ' + currentHiSiliconMode           
                     statusType = 'warn'
                         
                 elif currentOutputMode == 'invalid':
-                    setModeStatus = 'Error, unexpected mode: ' + currentAmlogicMode       
+                    setModeStatus = 'Error, unexpected mode: ' + currentHiSiliconMode       
                     statusType = 'warn'
                     
                 else:

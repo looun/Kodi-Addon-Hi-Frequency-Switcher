@@ -22,15 +22,33 @@ class Main:
         else:
             scriptArg = sys.argv[1]
                             
-            if scriptArg == '1080p-60hz':
+            if scriptArg == '2160p-60hz':
                 scriptMode = 'SetFreq'              
+            elif scriptArg == '2160p-59hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '2160p-50hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '2160p-25hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '2160p-24hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '2160p-23hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '1080p-60hz':
+                scriptMode = 'SetFreq'              
+            elif scriptArg == '1080p-59hz':
+                scriptMode = 'SetFreq'
             elif scriptArg == '1080p-50hz':
                 scriptMode = 'SetFreq'
             elif scriptArg == '1080p-24hz':
                 scriptMode = 'SetFreq'
+            elif scriptArg == '1080p-23hz':
+                scriptMode = 'SetFreq'
             elif scriptArg == '720p-60hz':
                 scriptMode = 'SetFreq'              
             elif scriptArg == '720p-50hz':
+                scriptMode = 'SetFreq'
+            elif scriptArg == '720p-59hz':
                 scriptMode = 'SetFreq'
             elif scriptArg == 'auto':
                 scriptMode = 'AutoSet'

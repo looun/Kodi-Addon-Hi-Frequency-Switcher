@@ -22,9 +22,13 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.labelCurrentRes, 1, 1, columnspan=10, pad_y=11)
        
         self.radio60hz = RadioButton('60 hz')
-        self.placeControl(self.radio60hz, 3, 1, columnspan=3)
+        self.placeControl(self.radio60hz, 2, 1, columnspan=3)
         self.radio60hz.setSelected(fsconfig.radio60hz)
          
+        self.radio59hz = RadioButton('59 hz')
+        self.placeControl(self.radio59hz, 3, 1, columnspan=3)
+        self.radio59hz.setSelected(fsconfig.radio59hz)
+
         self.radio50hz = RadioButton('50 hz')
         self.placeControl(self.radio50hz, 4, 1, columnspan=3)
         self.radio50hz.setSelected(fsconfig.radio50hz)
@@ -33,33 +37,47 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.radio24hz, 5, 1, columnspan=3)
         self.radio24hz.setSelected(fsconfig.radio24hz)
 
+        self.radio23hz = RadioButton('23 hz')
+        self.placeControl(self.radio23hz, 6, 1, columnspan=3)
+        self.radio23hz.setSelected(fsconfig.radio23hz)
+
         self.radioAuto = RadioButton('Automatic')
-        self.placeControl(self.radioAuto, 6, 1, columnspan=3)
+        self.placeControl(self.radioAuto, 7, 1, columnspan=3)
         self.radioAuto.setSelected(fsconfig.radioAuto)
         
         self.radioInfo = RadioButton('Info.')
-        self.placeControl(self.radioInfo, 7, 1, columnspan=3)
+        self.placeControl(self.radioInfo, 8, 1, columnspan=3)
         self.radioInfo.setSelected(fsconfig.radioInfo)
 
         self.buttonMap60hz = Button('Select Key')
-        self.placeControl(self.buttonMap60hz, 3, 7, columnspan=3)
+        self.placeControl(self.buttonMap60hz, 2, 7, columnspan=3)
  
+        self.buttonMap59hz = Button('Select Key')
+        self.placeControl(self.buttonMap59hz, 3, 7, columnspan=3)
+
         self.buttonMap50hz = Button('Select Key')
         self.placeControl(self.buttonMap50hz, 4, 7, columnspan=3)
 
         self.buttonMap24hz = Button('Select Key')
         self.placeControl(self.buttonMap24hz, 5, 7, columnspan=3)
 
+        self.buttonMap23hz = Button('Select Key')
+        self.placeControl(self.buttonMap23hz, 6, 7, columnspan=3)
+
         self.buttonMapAuto = Button('Select Key')
-        self.placeControl(self.buttonMapAuto, 6, 7, columnspan=3)
+        self.placeControl(self.buttonMapAuto, 7, 7, columnspan=3)
 
         self.buttonMapInfo = Button('Select Key')
-        self.placeControl(self.buttonMapInfo, 7, 7, columnspan=3)
+        self.placeControl(self.buttonMapInfo, 8, 7, columnspan=3)
 
         self.labelKey60hz = Label('')
-        self.placeControl(self.labelKey60hz, 3, 5, columnspan=2, pad_y=11)
+        self.placeControl(self.labelKey60hz, 2, 5, columnspan=2, pad_y=11)
         self.labelKey60hz.setLabel(fsconfig.key60hz)
  
+        self.labelKey59hz = Label('')
+        self.placeControl(self.labelKey59hz, 3, 5, columnspan=2, pad_y=11)
+        self.labelKey59hz.setLabel(fsconfig.key59hz)
+
         self.labelKey50hz = Label('')
         self.placeControl(self.labelKey50hz, 4, 5, columnspan=2, pad_y=11)
         self.labelKey50hz.setLabel(fsconfig.key50hz)
@@ -68,12 +86,16 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.labelKey24hz, 5, 5, columnspan=2, pad_y=11)
         self.labelKey24hz.setLabel(fsconfig.key24hz)
 
+        self.labelKey23hz = Label('')
+        self.placeControl(self.labelKey23hz, 6, 5, columnspan=2, pad_y=11)
+        self.labelKey23hz.setLabel(fsconfig.key23hz)
+
         self.labelKeyAuto = Label('')
-        self.placeControl(self.labelKeyAuto, 6, 5, columnspan=2, pad_y=11)
+        self.placeControl(self.labelKeyAuto, 7, 5, columnspan=2, pad_y=11)
         self.labelKeyAuto.setLabel(fsconfig.keyAuto)
 
         self.labelKeyInfo = Label('')
-        self.placeControl(self.labelKeyInfo, 7, 5, columnspan=2, pad_y=11)
+        self.placeControl(self.labelKeyInfo, 8, 5, columnspan=2, pad_y=11)
         self.labelKeyInfo.setLabel(fsconfig.keyInfo)
 
         self.buttonMapKeysSave = Button('Activate Keys')
@@ -85,9 +107,13 @@ class MapKeysWindow(AddonDialogWindow):
         self.checkKeyMap()  
 
         self.labelStatus60hz = Label('')
-        self.placeControl(self.labelStatus60hz, 3, 11, columnspan=2, pad_y=11)
+        self.placeControl(self.labelStatus60hz, 2, 11, columnspan=2, pad_y=11)
         self.labelStatus60hz.setLabel(fsconfig.status60hz)
  
+        self.labelStatus59hz = Label('')
+        self.placeControl(self.labelStatus59hz, 3, 11, columnspan=2, pad_y=11)
+        self.labelStatus59hz.setLabel(fsconfig.status59hz)
+
         self.labelStatus50hz = Label('')
         self.placeControl(self.labelStatus50hz, 4, 11, columnspan=2, pad_y=11)
         self.labelStatus50hz.setLabel(fsconfig.status50hz)
@@ -96,12 +122,16 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.labelStatus24hz, 5, 11, columnspan=2, pad_y=11)
         self.labelStatus24hz.setLabel(fsconfig.status24hz)
 
+        self.labelStatus23hz = Label('')
+        self.placeControl(self.labelStatus23hz, 6, 11, columnspan=2, pad_y=11)
+        self.labelStatus23hz.setLabel(fsconfig.status23hz)
+
         self.labelStatusAuto = Label('')
-        self.placeControl(self.labelStatusAuto, 6, 11, columnspan=2, pad_y=11)
+        self.placeControl(self.labelStatusAuto, 7, 11, columnspan=2, pad_y=11)
         self.labelStatusAuto.setLabel(fsconfig.statusAuto)
 
         self.labelStatusInfo = Label('')
-        self.placeControl(self.labelStatusInfo, 7, 11, columnspan=2, pad_y=11)
+        self.placeControl(self.labelStatusInfo, 8, 11, columnspan=2, pad_y=11)
         self.labelStatusInfo.setLabel(fsconfig.statusInfo)
 
         self.labelInfoTitle = Label('', alignment=ALIGN_LEFT)
@@ -112,13 +142,17 @@ class MapKeysWindow(AddonDialogWindow):
 
         # connect buttons and actions to functions
         self.connect(self.radio60hz, self.clickRadio60hz)
+        self.connect(self.radio59hz, self.clickRadio59hz)
         self.connect(self.radio50hz, self.clickRadio50hz)
         self.connect(self.radio24hz, self.clickRadio24hz)
+        self.connect(self.radio23hz, self.clickRadio23hz)
         self.connect(self.radioAuto, self.clickRadioAuto)
         self.connect(self.radioInfo, self.clickRadioInfo)
         self.connect(self.buttonMap60hz, self.clickButtonMap60hz)
+        self.connect(self.buttonMap59hz, self.clickButtonMap59hz)
         self.connect(self.buttonMap50hz, self.clickButtonMap50hz)
         self.connect(self.buttonMap24hz, self.clickButtonMap24hz)
+        self.connect(self.buttonMap23hz, self.clickButtonMap23hz)
         self.connect(self.buttonMapAuto, self.clickButtonMapAuto)
         self.connect(self.buttonMapInfo, self.clickButtonMapInfo)
         self.connect(self.buttonMapKeysSave, self.clickMapKeysSave)
@@ -128,21 +162,23 @@ class MapKeysWindow(AddonDialogWindow):
         # set the enabled state of objects
         self.atSetup = True
         self.clickRadio60hz()
+        self.clickRadio59hz()
         self.clickRadio50hz()
         self.clickRadio24hz()
+        self.clickRadio23hz()
         self.clickRadioAuto()
         self.clickRadioInfo()
         self.atSetup = False
         
         # check current display mode setting
-        currentOutputMode, currentAmlogicMode = fsutil.getDisplayMode()
+        currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
         
         if currentOutputMode == 'unsupported':
-            self.labelCurrentRes.setLabel('Unsupported resolution: ' + currentAmlogicMode)           
+            self.labelCurrentRes.setLabel('Unsupported resolution: ' + currentHiSiliconMode)           
             self.disableAll()
         
         elif currentOutputMode == 'invalid':
-            self.labelCurrentRes.setLabel('Error: ' + currentAmlogicMode)       
+            self.labelCurrentRes.setLabel('Error: ' + currentHiSiliconMode)       
             self.disableAll()
             
         else:
@@ -151,21 +187,31 @@ class MapKeysWindow(AddonDialogWindow):
             self.currentRes = currentOutputMode[0:resSplit]
             self.labelCurrentRes.setLabel('Current resolution: ' + self.currentRes)       
 
+            if self.currentRes == '2160p':
+                self.disable59hz()
+
             if self.currentRes == '720p':
                 self.disable24hz()
                 
+            if self.currentRes == '720p':
+                self.disable23hz()
+
             # check whether res has changed since KeyMap was last saved
             if (self.currentRes != fsconfig.keymapRes) and (fsconfig.keymapRes != ''):
                 self.labelCurrentRes.setLabel('Current resolution: ' + self.currentRes + ' (active resolution was ' + fsconfig.keymapRes + ')')       
                 self.clickMapKeysReset()
 
         # define key navigation (up-down)
-        self.radio60hz.controlDown(self.radio50hz)
-        self.radio50hz.controlUp(self.radio60hz)
+        self.radio60hz.controlDown(self.radio59hz)
+        self.radio59hz.controlUp(self.radio60hz)
+        self.radio59hz.controlDown(self.radio50hz)
+        self.radio50hz.controlUp(self.radio59hz)
         self.radio50hz.controlDown(self.radio24hz)
         self.radio24hz.controlUp(self.radio50hz)
-        self.radio24hz.controlDown(self.radioAuto)
-        self.radioAuto.controlUp(self.radio24hz)
+        self.radio24hz.controlDown(self.radio23hz)
+        self.radio23hz.controlUp(self.radio24hz)
+        self.radio23hz.controlDown(self.radioAuto)
+        self.radioAuto.controlUp(self.radio23hz)
         self.radioAuto.controlDown(self.radioInfo)
         self.radioInfo.controlUp(self.radioAuto)
         self.radioInfo.controlDown(self.buttonMapKeysSave)      
@@ -173,12 +219,16 @@ class MapKeysWindow(AddonDialogWindow):
         self.buttonMapKeysSave.controlDown(self.buttonMapKeysReset)
         self.buttonMapKeysReset.controlUp(self.buttonMapKeysSave)
 
-        self.buttonMap60hz.controlDown(self.buttonMap50hz)
-        self.buttonMap50hz.controlUp(self.buttonMap60hz)
+        self.buttonMap60hz.controlDown(self.buttonMap59hz)
+        self.buttonMap59hz.controlUp(self.buttonMap60hz)
+        self.buttonMap59hz.controlDown(self.buttonMap50hz)
+        self.buttonMap50hz.controlUp(self.buttonMap59hz)
         self.buttonMap50hz.controlDown(self.buttonMap24hz)
         self.buttonMap24hz.controlUp(self.buttonMap50hz)
-        self.buttonMap24hz.controlDown(self.buttonMapAuto)
-        self.buttonMapAuto.controlUp(self.buttonMap24hz)
+        self.buttonMap24hz.controlDown(self.buttonMap23hz)
+        self.buttonMap23hz.controlUp(self.buttonMap24hz)
+        self.buttonMap23hz.controlDown(self.buttonMapAuto)
+        self.buttonMapAuto.controlUp(self.buttonMap23hz)
         self.buttonMapAuto.controlDown(self.buttonMapInfo)
         self.buttonMapInfo.controlUp(self.buttonMapAuto)
         self.buttonMapInfo.controlDown(self.buttonMapKeysSave)
@@ -186,10 +236,14 @@ class MapKeysWindow(AddonDialogWindow):
         # define key navigation (left-right)
         self.radio60hz.controlRight(self.buttonMap60hz)
         self.buttonMap60hz.controlLeft(self.radio60hz)
+        self.radio59hz.controlRight(self.buttonMap59hz)
+        self.buttonMap59hz.controlLeft(self.radio59hz)
         self.radio50hz.controlRight(self.buttonMap50hz)
         self.buttonMap50hz.controlLeft(self.radio50hz)
         self.radio24hz.controlRight(self.buttonMap24hz)
         self.buttonMap24hz.controlLeft(self.radio24hz)
+        self.radio23hz.controlRight(self.buttonMap23hz)
+        self.buttonMap23hz.controlLeft(self.radio23hz)
         self.radioAuto.controlRight(self.buttonMapAuto)
         self.buttonMapAuto.controlLeft(self.radioAuto)
         self.radioInfo.controlRight(self.buttonMapInfo)
@@ -198,17 +252,33 @@ class MapKeysWindow(AddonDialogWindow):
         # set initial focus
         self.setFocus(self.radio60hz)
 
+    def disable59hz(self):
+
+        self.radio59hz.setEnabled(False)
+        self.buttonMap59hz.setEnabled(False)
+        self.labelKey59hz.setEnabled(False)
+
     def disable24hz(self):
 
         self.radio24hz.setEnabled(False)
         self.buttonMap24hz.setEnabled(False)
         self.labelKey24hz.setEnabled(False)
 
+    def disable23hz(self):
+
+        self.radio23hz.setEnabled(False)
+        self.buttonMap23hz.setEnabled(False)
+        self.labelKey23hz.setEnabled(False)
+
     def disableAll(self):
 
         self.radio60hz.setEnabled(False)
         self.buttonMap60hz.setEnabled(False)
         self.labelKey60hz.setEnabled(False)
+
+        self.radio59hz.setEnabled(False)
+        self.buttonMap59hz.setEnabled(False)
+        self.labelKey59hz.setEnabled(False)
 
         self.radio50hz.setEnabled(False)
         self.buttonMap50hz.setEnabled(False)
@@ -217,6 +287,10 @@ class MapKeysWindow(AddonDialogWindow):
         self.radio24hz.setEnabled(False)
         self.buttonMap24hz.setEnabled(False)
         self.labelKey24hz.setEnabled(False)
+
+        self.radio23hz.setEnabled(False)
+        self.buttonMap23hz.setEnabled(False)
+        self.labelKey23hz.setEnabled(False)
 
         self.radioAuto.setEnabled(False)
         self.buttonMapAuto.setEnabled(False)
@@ -243,6 +317,18 @@ class MapKeysWindow(AddonDialogWindow):
         if not self.atSetup:
             self.clickMapKeysReset()
 
+    def clickRadio59hz(self):
+
+        if self.radio59hz.isSelected():
+            self.buttonMap59hz.setEnabled(True)
+            self.labelKey59hz.setEnabled(True)
+        else:
+            self.buttonMap59hz.setEnabled(False)
+            self.labelKey59hz.setEnabled(False)
+
+        if not self.atSetup:
+            self.clickMapKeysReset()
+                            
     def clickRadio50hz(self):
 
         if self.radio50hz.isSelected():
@@ -267,6 +353,18 @@ class MapKeysWindow(AddonDialogWindow):
         if not self.atSetup:
             self.clickMapKeysReset()
                       
+    def clickRadio23hz(self):
+
+        if self.radio23hz.isSelected():
+            self.buttonMap23hz.setEnabled(True)
+            self.labelKey23hz.setEnabled(True)
+        else:
+            self.buttonMap23hz.setEnabled(False)
+            self.labelKey23hz.setEnabled(False)
+
+        if not self.atSetup:
+            self.clickMapKeysReset()
+                            
     def clickRadioAuto(self):
 
         if self.radioAuto.isSelected():
@@ -301,6 +399,16 @@ class MapKeysWindow(AddonDialogWindow):
             self.labelKey60hz.setLabel(str(keyPressed))
             self.removeDupeKey(keyPressed, '60hz')
 
+    def clickButtonMap59hz(self):
+     
+        self.clickMapKeysReset()
+
+        keyPressed = fskeylisten.KeyListener.getKeyPressed()
+ 
+        if keyPressed is not None:
+            self.labelKey59hz.setLabel(str(keyPressed))
+            self.removeDupeKey(keyPressed, '59hz')
+
     def clickButtonMap50hz(self):
      
         self.clickMapKeysReset()
@@ -320,6 +428,16 @@ class MapKeysWindow(AddonDialogWindow):
         if keyPressed is not None:
             self.labelKey24hz.setLabel(str(keyPressed))
             self.removeDupeKey(keyPressed, '24hz')
+
+    def clickButtonMap23hz(self):
+     
+        self.clickMapKeysReset()
+
+        keyPressed = fskeylisten.KeyListener.getKeyPressed()
+ 
+        if keyPressed is not None:
+            self.labelKey23hz.setLabel(str(keyPressed))
+            self.removeDupeKey(keyPressed, '23hz')
 
     def clickButtonMapAuto(self):
      
@@ -346,11 +464,17 @@ class MapKeysWindow(AddonDialogWindow):
         if (self.labelKey60hz.getLabel() == keyPressed) and (mappedAction != '60hz'):
             self.labelKey60hz.setLabel('')
  
+        if (self.labelKey59hz.getLabel() == keyPressed) and (mappedAction != '59hz'):
+            self.labelKey59hz.setLabel('')
+
         if (self.labelKey50hz.getLabel() == keyPressed) and (mappedAction != '50hz'):
             self.labelKey50hz.setLabel('')
 
         if (self.labelKey24hz.getLabel() == keyPressed) and (mappedAction != '24hz'):
             self.labelKey24hz.setLabel('')
+
+        if (self.labelKey23hz.getLabel() == keyPressed) and (mappedAction != '23hz'):
+            self.labelKey23hz.setLabel('')
 
         if (self.labelKeyAuto.getLabel() == keyPressed) and (mappedAction != 'Auto'):
             self.labelKeyAuto.setLabel('')
@@ -373,6 +497,11 @@ class MapKeysWindow(AddonDialogWindow):
                 keyMappings.insert(0, (self.labelKey60hz.getLabel(), actionRes + '-60hz'))
                 self.labelStatus60hz.setLabel('Active')
 
+        if self.radio59hz.isSelected():
+            if self.labelKey59hz.getLabel() != '':
+                keyMappings.insert(0, (self.labelKey59hz.getLabel(), actionRes + '-59hz'))
+                self.labelStatus59hz.setLabel('Active')
+
         if self.radio50hz.isSelected():
             if self.labelKey50hz.getLabel() != '':
                 keyMappings.insert(0, (self.labelKey50hz.getLabel(), actionRes + '-50hz'))
@@ -382,6 +511,11 @@ class MapKeysWindow(AddonDialogWindow):
             if self.labelKey24hz.getLabel() != '':
                 keyMappings.insert(0, (self.labelKey24hz.getLabel(), actionRes + '-24hz'))
                 self.labelStatus24hz.setLabel('Active')
+
+        if self.radio23hz.isSelected() and (actionRes == '1080p'):
+            if self.labelKey23hz.getLabel() != '':
+                keyMappings.insert(0, (self.labelKey23hz.getLabel(), actionRes + '-23hz'))
+                self.labelStatus23hz.setLabel('Active')
 
         if self.radioAuto.isSelected():
             if self.labelKeyAuto.getLabel() != '':
@@ -417,8 +551,10 @@ class MapKeysWindow(AddonDialogWindow):
             xbmc.sleep(600)
     
             self.labelStatus60hz.setLabel('')
+            self.labelStatus59hz.setLabel('')
             self.labelStatus50hz.setLabel('')
             self.labelStatus24hz.setLabel('')
+            self.labelStatus23hz.setLabel('')
             self.labelStatusAuto.setLabel('')
             self.labelStatusInfo.setLabel('')
                         
@@ -440,8 +576,10 @@ class MapKeysWindow(AddonDialogWindow):
             xbmc.executebuiltin('action(reloadkeymaps)')
 
             fsconfig.status60hz = ''
+            fsconfig.status59hz = ''
             fsconfig.status50hz = ''
             fsconfig.status24hz = ''
+            fsconfig.status23hz = ''
             fsconfig.statusAuto = ''
             fsconfig.statusInfo = ''            
             fsconfig.keymapRes = ''
@@ -453,8 +591,10 @@ class MapKeysWindow(AddonDialogWindow):
     def saveStatusSettings(self):
         
         fsconfig.status60hz = self.labelStatus60hz.getLabel()
+        fsconfig.status59hz = self.labelStatus50hz.getLabel()
         fsconfig.status50hz = self.labelStatus50hz.getLabel()
         fsconfig.status24hz = self.labelStatus24hz.getLabel()
+        fsconfig.status23hz = self.labelStatus24hz.getLabel()
         fsconfig.statusAuto = self.labelStatusAuto.getLabel()
         fsconfig.statusInfo = self.labelStatusInfo.getLabel()       
         fsconfig.keymapRes = ''
@@ -464,18 +604,24 @@ class MapKeysWindow(AddonDialogWindow):
     def saveAllSettings(self):
         
         fsconfig.radio60hz = self.radio60hz.isSelected()
+        fsconfig.radio59hz = self.radio59hz.isSelected()
         fsconfig.radio50hz = self.radio50hz.isSelected()
         fsconfig.radio24hz = self.radio24hz.isSelected()
+        fsconfig.radio23hz = self.radio23hz.isSelected()
         fsconfig.radioAuto = self.radioAuto.isSelected()
         fsconfig.radioInfo = self.radioInfo.isSelected()        
         fsconfig.key60hz = self.labelKey60hz.getLabel()
+        fsconfig.key59hz = self.labelKey59hz.getLabel()
         fsconfig.key50hz = self.labelKey50hz.getLabel()
         fsconfig.key24hz = self.labelKey24hz.getLabel()
+        fsconfig.key23hz = self.labelKey23hz.getLabel()
         fsconfig.keyAuto = self.labelKeyAuto.getLabel()
         fsconfig.keyInfo = self.labelKeyInfo.getLabel()        
         fsconfig.status60hz = self.labelStatus60hz.getLabel()
+        fsconfig.status59hz = self.labelStatus59hz.getLabel()
         fsconfig.status50hz = self.labelStatus50hz.getLabel()
         fsconfig.status24hz = self.labelStatus24hz.getLabel()
+        fsconfig.status23hz = self.labelStatus23hz.getLabel()
         fsconfig.statusAuto = self.labelStatusAuto.getLabel()
         fsconfig.statusInfo = self.labelStatusInfo.getLabel()       
         fsconfig.keymapRes = self.currentRes
@@ -495,47 +641,71 @@ class ConfigWindow(AddonDialogWindow):
 
         # create, place, then set objects
         self.radio60hz = RadioButton('60 hz')
-        self.placeControl(self.radio60hz, 1, 2, columnspan=6)
+        self.placeControl(self.radio60hz, 2, 2, columnspan=6)
         self.radio60hz.setSelected(fsconfig.radioAuto60hz)
          
+        self.radio59hz = RadioButton('59 hz')
+        self.placeControl(self.radio59hz, 3, 2, columnspan=6)
+        self.radio59hz.setSelected(fsconfig.radioAuto59hz)
+
         self.radio50hz = RadioButton('50 hz')
-        self.placeControl(self.radio50hz, 3, 2, columnspan=6)
+        self.placeControl(self.radio50hz, 4, 2, columnspan=6)
         self.radio50hz.setSelected(fsconfig.radioAuto50hz)
  
         self.radio24hz = RadioButton('24 hz')
         self.placeControl(self.radio24hz, 5, 2, columnspan=6)
         self.radio24hz.setSelected(fsconfig.radioAuto24hz)
 
+        self.radio23hz = RadioButton('23 hz')
+        self.placeControl(self.radio23hz, 6, 2, columnspan=6)
+        self.radio23hz.setSelected(fsconfig.radioAuto23hz)
+
         self.edit60hzFps1 = Edit('')
-        self.placeControl(self.edit60hzFps1, 1, 9, columnspan=3, pad_y=11)
+        self.placeControl(self.edit60hzFps1, 2, 9, columnspan=3, pad_y=11)
         self.edit60hzFps1.setText(fsconfig.edit60hzFps1)
 
         self.edit60hzFps2 = Edit('')
-        self.placeControl(self.edit60hzFps2, 1, 13, columnspan=3, pad_y=11)
+        self.placeControl(self.edit60hzFps2, 2, 13, columnspan=3, pad_y=11)
         self.edit60hzFps2.setText(fsconfig.edit60hzFps2)
         
         self.edit60hzFps3 = Edit('')
-        self.placeControl(self.edit60hzFps3, 1, 17, columnspan=3, pad_y=11)
+        self.placeControl(self.edit60hzFps3, 2, 17, columnspan=3, pad_y=11)
         self.edit60hzFps3.setText(fsconfig.edit60hzFps3)
         
         self.edit60hzFps4 = Edit('')
-        self.placeControl(self.edit60hzFps4, 1, 21, columnspan=3, pad_y=11)
+        self.placeControl(self.edit60hzFps4, 2, 21, columnspan=3, pad_y=11)
         self.edit60hzFps4.setText(fsconfig.edit60hzFps4)
         
+        self.edit59hzFps1 = Edit('')
+        self.placeControl(self.edit59hzFps1, 3, 9, columnspan=3, pad_y=11)
+        self.edit59hzFps1.setText(fsconfig.edit59hzFps1)
+
+        self.edit59hzFps2 = Edit('')
+        self.placeControl(self.edit59hzFps2, 3, 13, columnspan=3, pad_y=11)
+        self.edit59hzFps2.setText(fsconfig.edit59hzFps2)
+        
+        self.edit59hzFps3 = Edit('')
+        self.placeControl(self.edit59hzFps3, 3, 17, columnspan=3, pad_y=11)
+        self.edit59hzFps3.setText(fsconfig.edit59hzFps3)
+        
+        self.edit59hzFps4 = Edit('')
+        self.placeControl(self.edit59hzFps4, 3, 21, columnspan=3, pad_y=11)
+        self.edit59hzFps4.setText(fsconfig.edit59hzFps4)
+
         self.edit50hzFps1 = Edit('')
-        self.placeControl(self.edit50hzFps1, 3, 9, columnspan=3, pad_y=11)
+        self.placeControl(self.edit50hzFps1, 4, 9, columnspan=3, pad_y=11)
         self.edit50hzFps1.setText(fsconfig.edit50hzFps1)
 
         self.edit50hzFps2 = Edit('')
-        self.placeControl(self.edit50hzFps2, 3, 13, columnspan=3, pad_y=11)
+        self.placeControl(self.edit50hzFps2, 4, 13, columnspan=3, pad_y=11)
         self.edit50hzFps2.setText(fsconfig.edit50hzFps2)
         
         self.edit50hzFps3 = Edit('')
-        self.placeControl(self.edit50hzFps3, 3, 17, columnspan=3, pad_y=11)
+        self.placeControl(self.edit50hzFps3, 4, 17, columnspan=3, pad_y=11)
         self.edit50hzFps3.setText(fsconfig.edit50hzFps3)
         
         self.edit50hzFps4 = Edit('')
-        self.placeControl(self.edit50hzFps4, 3, 21, columnspan=3, pad_y=11)
+        self.placeControl(self.edit50hzFps4, 4, 21, columnspan=3, pad_y=11)
         self.edit50hzFps4.setText(fsconfig.edit50hzFps4)
                 
         self.edit24hzFps1 = Edit('')
@@ -554,6 +724,22 @@ class ConfigWindow(AddonDialogWindow):
         self.placeControl(self.edit24hzFps4, 5, 21, columnspan=3, pad_y=11)
         self.edit24hzFps4.setText(fsconfig.edit24hzFps4)
         
+        self.edit23hzFps1 = Edit('')
+        self.placeControl(self.edit23hzFps1, 6, 9, columnspan=3, pad_y=11)
+        self.edit23hzFps1.setText(fsconfig.edit23hzFps1)
+
+        self.edit23hzFps2 = Edit('')
+        self.placeControl(self.edit23hzFps2, 6, 13, columnspan=3, pad_y=11)
+        self.edit23hzFps2.setText(fsconfig.edit23hzFps2)
+        
+        self.edit23hzFps3 = Edit('')
+        self.placeControl(self.edit23hzFps3, 6, 17, columnspan=3, pad_y=11)
+        self.edit23hzFps3.setText(fsconfig.edit23hzFps3)
+        
+        self.edit23hzFps4 = Edit('')
+        self.placeControl(self.edit23hzFps4, 6, 21, columnspan=3, pad_y=11)
+        self.edit23hzFps4.setText(fsconfig.edit23hzFps4)
+
         self.buttonConfigSave = Button('Save Configuration')
         self.placeControl(self.buttonConfigSave, 9, 2, columnspan=8)
 
@@ -565,47 +751,71 @@ class ConfigWindow(AddonDialogWindow):
         
         # connect buttons and actions to functions
         self.connect(self.radio60hz, self.clickRadio60hz)
+        self.connect(self.radio59hz, self.clickRadio59hz)
         self.connect(self.radio50hz, self.clickRadio50hz)
         self.connect(self.radio24hz, self.clickRadio24hz)
+        self.connect(self.radio23hz, self.clickRadio23hz)
         self.connect(self.buttonConfigSave, self.clickConfigSave)
         self.connect(ACTION_NAV_BACK, self.close)
         
         # set the enabled state of objects
         self.clickRadio60hz()
+        self.clickRadio59hz()
         self.clickRadio50hz()
         self.clickRadio24hz()
+        self.clickRadio23hz()
 
         # define key navigation (up-down)
-        self.radio60hz.controlDown(self.radio50hz)
-        self.radio50hz.controlUp(self.radio60hz)
+        self.radio60hz.controlDown(self.radio59hz)
+        self.radio59hz.controlDown(self.radio50hz)
+        self.radio59hz.controlUp(self.radio60hz)
+        self.radio50hz.controlUp(self.radio59hz)
         self.radio50hz.controlDown(self.radio24hz)
         self.radio24hz.controlUp(self.radio50hz)
-        self.radio24hz.controlDown(self.buttonConfigSave)
-        self.buttonConfigSave.controlUp(self.radio24hz)
+        self.radio24hz.controlDown(self.radio23hz)
+        self.radio23hz.controlUp(self.radio24hz)
+        self.radio23hz.controlDown(self.buttonConfigSave)
+        self.buttonConfigSave.controlUp(self.radio23hz)
         
-        self.edit60hzFps1.controlDown(self.edit50hzFps1)
-        self.edit50hzFps1.controlUp(self.edit60hzFps1)
+        self.edit60hzFps1.controlDown(self.edit59hzFps1)
+        self.edit59hzFps1.controlUp(self.edit60hzFps1)
+        self.edit59hzFps1.controlDown(self.edit50hzFps1)
+        self.edit50hzFps1.controlUp(self.edit59hzFps1)
         self.edit50hzFps1.controlDown(self.edit24hzFps1)
         self.edit24hzFps1.controlUp(self.edit50hzFps1)
-        self.edit24hzFps1.controlDown(self.buttonConfigSave)
+        self.edit24hzFps1.controlDown(self.edit23hzFps1)
+        self.edit23hzFps1.controlUp(self.edit24hzFps1)
+        self.edit23hzFps1.controlDown(self.buttonConfigSave)
         
-        self.edit60hzFps2.controlDown(self.edit50hzFps2)
-        self.edit50hzFps2.controlUp(self.edit60hzFps2)
+        self.edit60hzFps2.controlDown(self.edit59hzFps2)
+        self.edit59hzFps2.controlUp(self.edit60hzFps2)
+        self.edit59hzFps2.controlDown(self.edit50hzFps2)
+        self.edit50hzFps2.controlUp(self.edit59hzFps2)
         self.edit50hzFps2.controlDown(self.edit24hzFps2)
         self.edit24hzFps2.controlUp(self.edit50hzFps2)
-        self.edit24hzFps2.controlDown(self.buttonConfigSave)
+        self.edit24hzFps2.controlDown(self.edit23hzFps2)
+        self.edit23hzFps2.controlUp(self.edit24hzFps2)
+        self.edit23hzFps2.controlDown(self.buttonConfigSave)
 
-        self.edit60hzFps3.controlDown(self.edit50hzFps3)
-        self.edit50hzFps3.controlUp(self.edit60hzFps3)
+        self.edit60hzFps3.controlDown(self.edit59hzFps3)
+        self.edit59hzFps3.controlUp(self.edit60hzFps3)
+        self.edit59hzFps3.controlDown(self.edit50hzFps3)
+        self.edit50hzFps3.controlUp(self.edit59hzFps3)
         self.edit50hzFps3.controlDown(self.edit24hzFps3)
         self.edit24hzFps3.controlUp(self.edit50hzFps3)
-        self.edit24hzFps3.controlDown(self.buttonConfigSave)
+        self.edit24hzFps3.controlDown(self.edit23hzFps3)
+        self.edit23hzFps3.controlUp(self.edit24hzFps3)
+        self.edit23hzFps3.controlDown(self.buttonConfigSave)
         
-        self.edit60hzFps4.controlDown(self.edit50hzFps4)
-        self.edit50hzFps4.controlUp(self.edit60hzFps4)
+        self.edit60hzFps4.controlDown(self.edit59hzFps4)
+        self.edit59hzFps4.controlUp(self.edit60hzFps4)
+        self.edit59hzFps4.controlDown(self.edit50hzFps4)
+        self.edit50hzFps4.controlUp(self.edit59hzFps4)
         self.edit50hzFps4.controlDown(self.edit24hzFps4)
         self.edit24hzFps4.controlUp(self.edit50hzFps4)
-        self.edit24hzFps4.controlDown(self.buttonConfigSave)
+        self.edit24hzFps4.controlDown(self.edit23hzFps4)
+        self.edit23hzFps4.controlUp(self.edit24hzFps4)
+        self.edit23hzFps4.controlDown(self.buttonConfigSave)
 
         # define key navigation (left-right)
         self.radio60hz.controlRight(self.edit60hzFps1)
@@ -617,6 +827,15 @@ class ConfigWindow(AddonDialogWindow):
         self.edit60hzFps3.controlRight(self.edit60hzFps4)
         self.edit60hzFps4.controlLeft(self.edit60hzFps3)
         
+        self.radio59hz.controlRight(self.edit59hzFps1)
+        self.edit59hzFps1.controlLeft(self.radio59hz)
+        self.edit59hzFps1.controlRight(self.edit59hzFps2)
+        self.edit59hzFps2.controlLeft(self.edit59hzFps1)
+        self.edit59hzFps2.controlRight(self.edit59hzFps3)
+        self.edit59hzFps3.controlLeft(self.edit59hzFps2)
+        self.edit59hzFps3.controlRight(self.edit59hzFps4)
+        self.edit59hzFps4.controlLeft(self.edit59hzFps3)
+
         self.radio50hz.controlRight(self.edit50hzFps1)
         self.edit50hzFps1.controlLeft(self.radio50hz)
         self.edit50hzFps1.controlRight(self.edit50hzFps2)
@@ -635,6 +854,15 @@ class ConfigWindow(AddonDialogWindow):
         self.edit24hzFps3.controlRight(self.edit24hzFps4)
         self.edit24hzFps4.controlLeft(self.edit24hzFps3)
 
+        self.radio23hz.controlRight(self.edit23hzFps1)
+        self.edit23hzFps1.controlLeft(self.radio23hz)
+        self.edit23hzFps1.controlRight(self.edit23hzFps2)
+        self.edit23hzFps2.controlLeft(self.edit23hzFps1)
+        self.edit23hzFps2.controlRight(self.edit23hzFps3)
+        self.edit23hzFps3.controlLeft(self.edit23hzFps2)
+        self.edit23hzFps3.controlRight(self.edit23hzFps4)
+        self.edit23hzFps4.controlLeft(self.edit23hzFps3)
+
         # set initial focus
         self.setFocus(self.radio60hz)
 
@@ -650,6 +878,19 @@ class ConfigWindow(AddonDialogWindow):
             self.edit60hzFps2.setEnabled(False)
             self.edit60hzFps3.setEnabled(False)
             self.edit60hzFps4.setEnabled(False)
+
+    def clickRadio59hz(self):
+
+        if self.radio59hz.isSelected():
+            self.edit59hzFps1.setEnabled(True)
+            self.edit59hzFps2.setEnabled(True)
+            self.edit59hzFps3.setEnabled(True)
+            self.edit59hzFps4.setEnabled(True)
+        else:
+            self.edit59hzFps1.setEnabled(False)
+            self.edit59hzFps2.setEnabled(False)
+            self.edit59hzFps3.setEnabled(False)
+            self.edit59hzFps4.setEnabled(False)
 
     def clickRadio50hz(self):
 
@@ -677,6 +918,19 @@ class ConfigWindow(AddonDialogWindow):
             self.edit24hzFps3.setEnabled(False)
             self.edit24hzFps4.setEnabled(False)
     
+    def clickRadio23hz(self):
+
+        if self.radio23hz.isSelected():
+            self.edit23hzFps1.setEnabled(True)
+            self.edit23hzFps2.setEnabled(True)
+            self.edit23hzFps3.setEnabled(True)
+            self.edit23hzFps4.setEnabled(True)
+        else:
+            self.edit23hzFps1.setEnabled(False)
+            self.edit23hzFps2.setEnabled(False)
+            self.edit23hzFps3.setEnabled(False)
+            self.edit23hzFps4.setEnabled(False)
+
     def clickConfigSave(self):
   
         self.labelInfoTitle.setLabel('Verifying settings...')
@@ -687,14 +941,22 @@ class ConfigWindow(AddonDialogWindow):
                        self.edit60hzFps2, 
                        self.edit60hzFps3, 
                        self.edit60hzFps4, 
+                       self.edit59hzFps1, 
+                       self.edit59hzFps2, 
+                       self.edit59hzFps3, 
+                       self.edit59hzFps4,
                        self.edit50hzFps1, 
                        self.edit50hzFps2, 
                        self.edit50hzFps3, 
-                       self.edit50hzFps4,         
+                       self.edit50hzFps4,
                        self.edit24hzFps1,
                        self.edit24hzFps2, 
                        self.edit24hzFps3, 
-                       self.edit24hzFps4]   
+                       self.edit24hzFps4,
+                       self.edit23hzFps1, 
+                       self.edit23hzFps2, 
+                       self.edit23hzFps3, 
+                       self.edit23hzFps4]
 
         self.fpsList = []       # FPS list for duplicate checking
 
@@ -778,6 +1040,10 @@ class ConfigWindow(AddonDialogWindow):
         fsconfig.edit60hzFps2 = self.edit60hzFps2.getText() 
         fsconfig.edit60hzFps3 = self.edit60hzFps3.getText() 
         fsconfig.edit60hzFps4 = self.edit60hzFps4.getText() 
+        fsconfig.edit59hzFps1 = self.edit59hzFps1.getText() 
+        fsconfig.edit59hzFps2 = self.edit59hzFps2.getText() 
+        fsconfig.edit59hzFps3 = self.edit59hzFps3.getText() 
+        fsconfig.edit59hzFps4 = self.edit59hzFps4.getText() 
         fsconfig.edit50hzFps1 = self.edit50hzFps1.getText() 
         fsconfig.edit50hzFps2 = self.edit50hzFps2.getText() 
         fsconfig.edit50hzFps3 = self.edit50hzFps3.getText() 
@@ -786,10 +1052,16 @@ class ConfigWindow(AddonDialogWindow):
         fsconfig.edit24hzFps2 = self.edit24hzFps2.getText() 
         fsconfig.edit24hzFps3 = self.edit24hzFps3.getText() 
         fsconfig.edit24hzFps4 = self.edit24hzFps4.getText() 
-        
+        fsconfig.edit23hzFps1 = self.edit23hzFps1.getText() 
+        fsconfig.edit23hzFps2 = self.edit23hzFps2.getText() 
+        fsconfig.edit23hzFps3 = self.edit23hzFps3.getText() 
+        fsconfig.edit23hzFps4 = self.edit23hzFps4.getText() 
+
         fsconfig.radioAuto60hz = self.radio60hz.isSelected()
+        fsconfig.radioAuto59hz = self.radio59hz.isSelected()
         fsconfig.radioAuto50hz = self.radio50hz.isSelected()
         fsconfig.radioAuto24hz = self.radio24hz.isSelected()
+        fsconfig.radioAuto23hz = self.radio23hz.isSelected()
         
         saveSettingsStatus = fsconfigutil.saveSettings()
 
@@ -846,14 +1118,14 @@ class MapEventsWindow(AddonDialogWindow):
 #         self.placeControl(self.labelInfoText, 11, 12, columnspan=16, pad_y=11)
         
         # check current display mode setting
-        currentOutputMode, currentAmlogicMode = fsutil.getDisplayMode()
+        currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
         
         if currentOutputMode == 'unsupported':
-            self.labelCurrentRes.setLabel('Unsupported resolution: ' + currentAmlogicMode)           
+            self.labelCurrentRes.setLabel('Unsupported resolution: ' + currentHiSiliconMode)           
             self.disableAll()
         
         elif currentOutputMode == 'invalid':
-            self.labelCurrentRes.setLabel('Error: ' + currentAmlogicMode)       
+            self.labelCurrentRes.setLabel('Error: ' + currentHiSiliconMode)       
             self.disableAll()
             
         else:
@@ -939,11 +1211,11 @@ class MapEventsWindow(AddonDialogWindow):
             if fsconfig.radioOnPlayStart:
                 self.labelActiveService.setLabel('Service running')
             else:
-                self.labelActiveService.setLabel('Service running - restart XBMC')
+                self.labelActiveService.setLabel('Service running - restart KODI')
             
         else:
             if fsconfig.radioOnPlayStart:
-                self.labelActiveService.setLabel('Service stopped - restart XBMC')
+                self.labelActiveService.setLabel('Service stopped - restart KODI')
             else:
                 self.labelActiveService.setLabel('Service stopped')
 
@@ -1156,11 +1428,11 @@ class MainWindow(AddonDialogWindow):
             if fsconfig.radioOnPlayStart:
                 self.labelInfoStatus1.setLabel('Service running')
             else:
-                self.labelInfoStatus1.setLabel('Service running - restart XBMC')
+                self.labelInfoStatus1.setLabel('Service running - restart KODI')
 
         else:
             if fsconfig.radioOnPlayStart:
-                self.labelInfoStatus1.setLabel('Service stopped - restart XBMC')
+                self.labelInfoStatus1.setLabel('Service stopped - restart KODI')
             else:
                 self.labelInfoStatus1.setLabel('Service stopped')
 
@@ -1254,11 +1526,12 @@ class InfoPanel():
             labelHdmiMode = xbmcgui.ControlLabel(200, panelLineTop, 100, 20, '', font='font12')
             
             # get current display mode setting
-            currentOutputMode, currentAmlogicMode = fsutil.getDisplayMode()
+            currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
 
             # get current frequency
             freqSplit = currentOutputMode.find('-') + 1
-            currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
+            # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
+            currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
             
             labelHdmiMode.setLabel(currentFreq + ' hz')
             
@@ -1312,7 +1585,7 @@ class InfoPanel():
                 if (refreshCounter == 2) or (refreshCounter == 4):
 
                     # Update Current FPS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    currentFPS = xbmc.getInfoLabel('System.FPS')
+                    currentFPS = xbmc.getInfoLabel('System.FPS') + ' fps'
                     labelCurrentFps.setLabel(currentFPS)
 
                 # Every second (update panel)
@@ -1326,9 +1599,10 @@ class InfoPanel():
                         labelSourceFps.setLabel('')
  
                     # Update Output Frequency ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-                    currentOutputMode, currentAmlogicMode = fsutil.getDisplayMode()
+                    currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
                     freqSplit = currentOutputMode.find('-') + 1
-                    currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
+                    # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
+                    currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
                     labelHdmiMode.setLabel(currentFreq + ' hz')
 
                     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
