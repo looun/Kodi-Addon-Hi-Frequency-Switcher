@@ -23,7 +23,10 @@ def getSourceFPS():
     # get location of log file
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
         logFileName = xbmc.translatePath('special://temp/kodi.log')
-    
+        if os.access(logFileName, os.R_OK):
+            logFileName = xbmc.translatePath('special://temp/kodi.log')            
+        else:    
+            logFileName = xbmc.translatePath('special://temp/spmc.log') 
     elif fsconfig.osPlatform == 'Windows 7':
         logFileName = xbmc.translatePath('special://home\kodi.log')
     

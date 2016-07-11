@@ -1490,7 +1490,7 @@ class InfoPanel():
     
     @staticmethod
     def showInfo():
-        
+
         # get current window
         windowID = xbmcgui.getCurrentWindowId()
         
@@ -1512,12 +1512,14 @@ class InfoPanel():
             
             panelBorder = 10
             panelLineTop = panelTop + panelBorder
-            panelLineSpacing = 23
-            panelLineCount = 3
+            panelLineSpacing = 18
+            panelLineCount = 24
             
             descHdmiMode = 'Output frequency:'
             descSourceFPS = 'Source framerate:'
             descCurrentFPS = 'Current framerate:'
+            descCurrentDISP1 = 'Current DISP1:'
+            descCurrentHDMI0 = 'Current HDMI0:'
             
             imageInfoPanel = xbmcgui.ControlImage(-200, panelTop, 1920, (panelBorder * 2) + (panelLineSpacing * panelLineCount), 'DialogBack2.png', colorDiffuse='0xBBBBBBBB')
 
@@ -1532,8 +1534,7 @@ class InfoPanel():
             freqSplit = currentOutputMode.find('-') + 1
             # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
             currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
-            
-            labelHdmiMode.setLabel(currentFreq + ' hz')
+            labelHdmiMode.setLabel(currentFreq)
             
             # Source FPS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
             labelSourceFpsTitle = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 1), 150, 20, descSourceFPS, font='font12')
@@ -1556,10 +1557,28 @@ class InfoPanel():
             
             labelCurrentFps.setLabel(currentFPS)
 
+            # Current HiMedia disp1 --------------------------------------------------------------------------------------------------------------------------------------------------------
+            # labelCurrentDisp1Title = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentDISP1, font='font12')
+            modeFile = "/proc/msp/disp1"
+            labelCurrentDisp1 = xbmcgui.ControlLabel(100, panelLineTop + (panelLineSpacing * 3), 600, 600, '', font='font12')
+
+            with open(modeFile, 'r') as modeFileHandle: 
+                currentDisp1 = modeFileHandle.read()
+            labelCurrentDisp1.setLabel(currentDisp1)
+
+            # Current HiMedia HDMI0 --------------------------------------------------------------------------------------------------------------------------------------------------------
+            # labelCurrentHdmi0Title = xbmcgui.ControlLabel(750, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentHDMI0, font='font12')
+            modeFile = "/proc/msp/hdmi0"
+            labelCurrentHdmi0 = xbmcgui.ControlLabel(700, panelLineTop - (panelLineSpacing * 1), 600, 600, '', font='font12')
+
+            with open(modeFile, 'r') as modeFileHandle: 
+                currentDisp1 = modeFileHandle.read()
+            labelCurrentHdmi0.setLabel(currentDisp1)
+
             # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
             # build list of controls
-            controlList = [imageInfoPanel, labelHdmiModeTitle, labelHdmiMode, labelSourceFpsTitle, labelSourceFps, labelCurrentFpsTitle, labelCurrentFps]
+            controlList = [imageInfoPanel, labelHdmiModeTitle, labelHdmiMode, labelSourceFpsTitle, labelSourceFps, labelCurrentFpsTitle, labelCurrentFps, labelCurrentDisp1, labelCurrentHdmi0]
 
 #             if fsconfig.radioAuto50hz:
 #                 syncConfig.extend([(fsconfig.edit50hzFps1, mode50hz), 
@@ -1603,7 +1622,19 @@ class InfoPanel():
                     freqSplit = currentOutputMode.find('-') + 1
                     # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
                     currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
-                    labelHdmiMode.setLabel(currentFreq + ' hz')
+                    labelHdmiMode.setLabel(currentFreq)
+
+                    # Update HiMedia Disp1 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    modeFile = "/proc/msp/disp1"
+                    with open(modeFile, 'r') as modeFileHandle: 
+                        currentDisp1 = modeFileHandle.read()
+                    labelCurrentDisp1.setLabel(currentDisp1)
+
+                    # Update HiMedia HDMI0 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    modeFile = "/proc/msp/hdmi0"
+                    with open(modeFile, 'r') as modeFileHandle: 
+                        currentHdmi0 = modeFileHandle.read()
+                    labelCurrentHdmi0.setLabel(currentHdmi0)
 
                     # ------------------------------------------------------------------------------------------------------------------------------------------------------------------
                         
