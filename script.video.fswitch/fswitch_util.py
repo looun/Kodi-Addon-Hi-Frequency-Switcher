@@ -22,13 +22,10 @@ def getSourceFPS():
     
     # get location of log file
     if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
-        logFileName = xbmc.translatePath('special://temp/kodi.log')
-        if os.access(logFileName, os.R_OK):
-            logFileName = xbmc.translatePath('special://temp/kodi.log')            
-        else:    
-            logFileName = xbmc.translatePath('special://temp/spmc.log') 
+        logFileName = xbmc.translatePath('special://temp') + xbmc.translatePath('special://temp')[xbmc.translatePath('special://temp').find('files')+7:xbmc.translatePath('special://temp').find('temp')].replace('/','') + '.log'
+
     elif fsconfig.osPlatform == 'Windows 7':
-        logFileName = xbmc.translatePath('special://home\kodi.log')
+        logFileName = xbmc.translatePath('special://home') + xbmc.translatePath('special://home')[xbmc.translatePath('special://home').find('files')+7:xbmc.translatePath('special://home').find('temp')].replace('/','') + '.log'
     
     else:
         return videoFileName, videoFPSValue

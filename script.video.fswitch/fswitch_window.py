@@ -45,9 +45,13 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.radioAuto, 7, 1, columnspan=3)
         self.radioAuto.setSelected(fsconfig.radioAuto)
         
-        self.radioInfo = RadioButton('Info.')
+        self.radioInfo = RadioButton('Info')
         self.placeControl(self.radioInfo, 8, 1, columnspan=3)
         self.radioInfo.setSelected(fsconfig.radioInfo)
+
+        self.radioHiPQTools = RadioButton('HiPQTools')
+        self.placeControl(self.radioHiPQTools, 9, 1, columnspan=3)
+        self.radioHiPQTools.setSelected(fsconfig.radioHiPQTools)
 
         self.buttonMap60hz = Button('Select Key')
         self.placeControl(self.buttonMap60hz, 2, 7, columnspan=3)
@@ -69,6 +73,9 @@ class MapKeysWindow(AddonDialogWindow):
 
         self.buttonMapInfo = Button('Select Key')
         self.placeControl(self.buttonMapInfo, 8, 7, columnspan=3)
+
+        self.buttonMapHiPQTools = Button('Select Key')
+        self.placeControl(self.buttonMapHiPQTools, 9, 7, columnspan=3)
 
         self.labelKey60hz = Label('')
         self.placeControl(self.labelKey60hz, 2, 5, columnspan=2, pad_y=11)
@@ -98,11 +105,15 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.labelKeyInfo, 8, 5, columnspan=2, pad_y=11)
         self.labelKeyInfo.setLabel(fsconfig.keyInfo)
 
+        self.labelKeyHiPQTools = Label('')
+        self.placeControl(self.labelKeyHiPQTools, 9, 5, columnspan=2, pad_y=11)
+        self.labelKeyHiPQTools.setLabel(fsconfig.keyHiPQTools)
+
         self.buttonMapKeysSave = Button('Activate Keys')
-        self.placeControl(self.buttonMapKeysSave, 9, 1, columnspan=4)
+        self.placeControl(self.buttonMapKeysSave, 10, 1, columnspan=4)
 
         self.buttonMapKeysReset = Button('Deactivate Keys')
-        self.placeControl(self.buttonMapKeysReset, 10, 1, columnspan=4)
+        self.placeControl(self.buttonMapKeysReset, 11, 1, columnspan=4)
 
         self.checkKeyMap()  
 
@@ -134,11 +145,15 @@ class MapKeysWindow(AddonDialogWindow):
         self.placeControl(self.labelStatusInfo, 8, 11, columnspan=2, pad_y=11)
         self.labelStatusInfo.setLabel(fsconfig.statusInfo)
 
+        self.labelStatusHiPQTools = Label('')
+        self.placeControl(self.labelStatusHiPQTools, 9, 11, columnspan=2, pad_y=11)
+        self.labelStatusHiPQTools.setLabel(fsconfig.statusHiPQTools)
+
         self.labelInfoTitle = Label('', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelInfoTitle, 9, 6, columnspan=8, pad_y=11)
+        self.placeControl(self.labelInfoTitle, 10, 6, columnspan=8, pad_y=11)
         
         self.labelInfoText = Label('', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelInfoText, 10, 6, columnspan=8, pad_y=11)
+        self.placeControl(self.labelInfoText, 11, 6, columnspan=8, pad_y=11)
 
         # connect buttons and actions to functions
         self.connect(self.radio60hz, self.clickRadio60hz)
@@ -148,6 +163,7 @@ class MapKeysWindow(AddonDialogWindow):
         self.connect(self.radio23hz, self.clickRadio23hz)
         self.connect(self.radioAuto, self.clickRadioAuto)
         self.connect(self.radioInfo, self.clickRadioInfo)
+        self.connect(self.radioHiPQTools, self.clickRadioHiPQTools)
         self.connect(self.buttonMap60hz, self.clickButtonMap60hz)
         self.connect(self.buttonMap59hz, self.clickButtonMap59hz)
         self.connect(self.buttonMap50hz, self.clickButtonMap50hz)
@@ -155,6 +171,7 @@ class MapKeysWindow(AddonDialogWindow):
         self.connect(self.buttonMap23hz, self.clickButtonMap23hz)
         self.connect(self.buttonMapAuto, self.clickButtonMapAuto)
         self.connect(self.buttonMapInfo, self.clickButtonMapInfo)
+        self.connect(self.buttonMapHiPQTools, self.clickButtonMapHiPQTools)
         self.connect(self.buttonMapKeysSave, self.clickMapKeysSave)
         self.connect(self.buttonMapKeysReset, self.clickMapKeysReset)       
         self.connect(ACTION_NAV_BACK, self.close)
@@ -168,6 +185,7 @@ class MapKeysWindow(AddonDialogWindow):
         self.clickRadio23hz()
         self.clickRadioAuto()
         self.clickRadioInfo()
+        self.clickRadioHiPQTools()
         self.atSetup = False
         
         # check current display mode setting
@@ -214,8 +232,10 @@ class MapKeysWindow(AddonDialogWindow):
         self.radioAuto.controlUp(self.radio23hz)
         self.radioAuto.controlDown(self.radioInfo)
         self.radioInfo.controlUp(self.radioAuto)
-        self.radioInfo.controlDown(self.buttonMapKeysSave)      
-        self.buttonMapKeysSave.controlUp(self.radioInfo)
+        self.radioInfo.controlDown(self.radioHiPQTools)
+        self.radioHiPQTools.controlUp(self.radioInfo)
+        self.radioHiPQTools.controlDown(self.buttonMapKeysSave)      
+        self.buttonMapKeysSave.controlUp(self.radioHiPQTools)
         self.buttonMapKeysSave.controlDown(self.buttonMapKeysReset)
         self.buttonMapKeysReset.controlUp(self.buttonMapKeysSave)
 
@@ -231,7 +251,9 @@ class MapKeysWindow(AddonDialogWindow):
         self.buttonMapAuto.controlUp(self.buttonMap23hz)
         self.buttonMapAuto.controlDown(self.buttonMapInfo)
         self.buttonMapInfo.controlUp(self.buttonMapAuto)
-        self.buttonMapInfo.controlDown(self.buttonMapKeysSave)
+        self.buttonMapInfo.controlDown(self.buttonMapHiPQTools)
+        self.buttonMapHiPQTools.controlUp(self.buttonMapInfo)
+        self.buttonMapHiPQTools.controlDown(self.buttonMapKeysSave)
         
         # define key navigation (left-right)
         self.radio60hz.controlRight(self.buttonMap60hz)
@@ -248,6 +270,8 @@ class MapKeysWindow(AddonDialogWindow):
         self.buttonMapAuto.controlLeft(self.radioAuto)
         self.radioInfo.controlRight(self.buttonMapInfo)
         self.buttonMapInfo.controlLeft(self.radioInfo)
+        self.radioHiPQTools.controlRight(self.buttonMapHiPQTools)
+        self.buttonMapHiPQTools.controlLeft(self.radioHiPQTools)
 
         # set initial focus
         self.setFocus(self.radio60hz)
@@ -299,6 +323,10 @@ class MapKeysWindow(AddonDialogWindow):
         self.radioInfo.setEnabled(False)
         self.buttonMapInfo.setEnabled(False)
         self.labelKeyInfo.setEnabled(False)
+
+        self.radioHiPQTools.setEnabled(False)
+        self.buttonMapHiPQTools.setEnabled(False)
+        self.labelKeyHiPQTools.setEnabled(False)
 
         self.buttonMapKeysSave.setEnabled(False)
         self.buttonMapKeysReset.setEnabled(False)
@@ -389,6 +417,18 @@ class MapKeysWindow(AddonDialogWindow):
         if not self.atSetup:
             self.clickMapKeysReset()
 
+    def clickRadioHiPQTools(self):
+
+        if self.radioHiPQTools.isSelected():
+            self.buttonMapHiPQTools.setEnabled(True)
+            self.labelKeyHiPQTools.setEnabled(True)
+        else:
+            self.buttonMapHiPQTools.setEnabled(False)
+            self.labelKeyHiPQTools.setEnabled(False)
+
+        if not self.atSetup:
+            self.clickMapKeysReset()
+
     def clickButtonMap60hz(self):
      
         self.clickMapKeysReset()
@@ -458,7 +498,17 @@ class MapKeysWindow(AddonDialogWindow):
         if keyPressed is not None:
             self.labelKeyInfo.setLabel(str(keyPressed))
             self.removeDupeKey(keyPressed, 'Info')
-    
+
+    def clickButtonMapHiPQTools(self):
+     
+        self.clickMapKeysReset()
+
+        keyPressed = fskeylisten.KeyListener.getKeyPressed()
+ 
+        if keyPressed is not None:
+            self.labelKeyHiPQTools.setLabel(str(keyPressed))
+            self.removeDupeKey(keyPressed, 'HiPQTools')
+
     def removeDupeKey(self, keyPressed, mappedAction):
         
         if (self.labelKey60hz.getLabel() == keyPressed) and (mappedAction != '60hz'):
@@ -481,6 +531,9 @@ class MapKeysWindow(AddonDialogWindow):
 
         if (self.labelKeyInfo.getLabel() == keyPressed) and (mappedAction != 'Info'):
             self.labelKeyInfo.setLabel('')
+
+        if (self.labelKeyHiPQTools.getLabel() == keyPressed) and (mappedAction != 'HiPQTools'):
+            self.labelKeyHiPQTools.setLabel('')
 
     def clickMapKeysSave(self):
         
@@ -526,7 +579,12 @@ class MapKeysWindow(AddonDialogWindow):
             if self.labelKeyInfo.getLabel() != '':
                 keyMappings.insert(0, (self.labelKeyInfo.getLabel(), 'info'))
                 self.labelStatusInfo.setLabel('Active')
-        
+
+        if self.radioHiPQTools.isSelected():
+            if self.labelKeyHiPQTools.getLabel() != '':
+                keyMappings.insert(0, (self.labelKeyHiPQTools.getLabel(), 'hipqtools'))
+                self.labelStatusHiPQTools.setLabel('Active')
+
         keyScope = 'global'
         
         if not keyMappings:
@@ -557,6 +615,7 @@ class MapKeysWindow(AddonDialogWindow):
             self.labelStatus23hz.setLabel('')
             self.labelStatusAuto.setLabel('')
             self.labelStatusInfo.setLabel('')
+            self.labelStatusHiPQTools.setLabel('')
                         
             mapKeyResetStatus = fsutil.mapKeyReset()
     
@@ -582,6 +641,7 @@ class MapKeysWindow(AddonDialogWindow):
             fsconfig.status23hz = ''
             fsconfig.statusAuto = ''
             fsconfig.statusInfo = ''            
+            fsconfig.statusHiPQTools = ''
             fsconfig.keymapRes = ''
             
             saveSettingsStatus = fsconfigutil.saveSettings()
@@ -597,6 +657,7 @@ class MapKeysWindow(AddonDialogWindow):
         fsconfig.status23hz = self.labelStatus24hz.getLabel()
         fsconfig.statusAuto = self.labelStatusAuto.getLabel()
         fsconfig.statusInfo = self.labelStatusInfo.getLabel()       
+        fsconfig.statusHiPQTools = self.labelStatusHiPQTools.getLabel()       
         fsconfig.keymapRes = ''
         
         saveSettingsStatus = fsconfigutil.saveSettings()
@@ -609,21 +670,24 @@ class MapKeysWindow(AddonDialogWindow):
         fsconfig.radio24hz = self.radio24hz.isSelected()
         fsconfig.radio23hz = self.radio23hz.isSelected()
         fsconfig.radioAuto = self.radioAuto.isSelected()
-        fsconfig.radioInfo = self.radioInfo.isSelected()        
+        fsconfig.radioInfo = self.radioInfo.isSelected() 
+        fsconfig.radioHiPQTools = self.radioHiPQTools.isSelected()
         fsconfig.key60hz = self.labelKey60hz.getLabel()
         fsconfig.key59hz = self.labelKey59hz.getLabel()
         fsconfig.key50hz = self.labelKey50hz.getLabel()
         fsconfig.key24hz = self.labelKey24hz.getLabel()
         fsconfig.key23hz = self.labelKey23hz.getLabel()
         fsconfig.keyAuto = self.labelKeyAuto.getLabel()
-        fsconfig.keyInfo = self.labelKeyInfo.getLabel()        
+        fsconfig.keyInfo = self.labelKeyInfo.getLabel()
+        fsconfig.keyHiPQTools = self.labelKeyHiPQTools.getLabel()
         fsconfig.status60hz = self.labelStatus60hz.getLabel()
         fsconfig.status59hz = self.labelStatus59hz.getLabel()
         fsconfig.status50hz = self.labelStatus50hz.getLabel()
         fsconfig.status24hz = self.labelStatus24hz.getLabel()
         fsconfig.status23hz = self.labelStatus23hz.getLabel()
         fsconfig.statusAuto = self.labelStatusAuto.getLabel()
-        fsconfig.statusInfo = self.labelStatusInfo.getLabel()       
+        fsconfig.statusInfo = self.labelStatusInfo.getLabel()   
+        fsconfig.statusHiPQTools = self.labelStatusHiPQTools.getLabel()
         fsconfig.keymapRes = self.currentRes
         
         saveSettingsStatus = fsconfigutil.saveSettings()
@@ -1513,7 +1577,7 @@ class InfoPanel():
             panelBorder = 10
             panelLineTop = panelTop + panelBorder
             panelLineSpacing = 18
-            panelLineCount = 24
+            panelLineCount = 32
             
             descHdmiMode = 'Output frequency:'
             descSourceFPS = 'Source framerate:'

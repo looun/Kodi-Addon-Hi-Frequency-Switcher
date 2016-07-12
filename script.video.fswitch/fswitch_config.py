@@ -21,6 +21,7 @@ radio24hz = None
 radio23hz = None
 radioAuto = None
 radioInfo = None
+radioHiPQTools = None
 
 key60hz = None
 key59hz = None
@@ -29,6 +30,7 @@ key24hz = None
 key23hz = None
 keyAuto = None
 keyInfo = None
+keyHiPQTools = None
 
 status60hz = None
 status59hz = None
@@ -37,6 +39,7 @@ status24hz = None
 status23hz = None
 statusAuto = None
 statusInfo = None
+statusHiPQTools = None
 
 keymapRes = None
 

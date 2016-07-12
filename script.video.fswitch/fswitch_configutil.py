@@ -129,6 +129,7 @@ def resetSettingsFile():
     fsSettings['radio23hz'] = False
     fsSettings['radioAuto'] = False
     fsSettings['radioInfo'] = False
+    fsSettings['radioHiPQTools'] = False
     
     fsSettings['key60hz'] = ''
     fsSettings['key59hz'] = ''
@@ -137,6 +138,7 @@ def resetSettingsFile():
     fsSettings['key23hz'] = ''
     fsSettings['keyAuto'] = ''
     fsSettings['keyInfo'] = ''
+    fsSettings['keyHiPQTools'] = ''
     
     fsSettings['status60hz'] = ''
     fsSettings['status59hz'] = ''
@@ -145,6 +147,7 @@ def resetSettingsFile():
     fsSettings['status23hz'] = ''
     fsSettings['statusAuto'] = ''
     fsSettings['statusInfo'] = ''
+    fsSettings['statusHiPQTools'] = ''
     
     fsSettings['keymapRes'] = ''
     
@@ -296,6 +299,7 @@ def loadSettings():
             fsconfig.radio23hz = fsSettings['radio23hz']
             fsconfig.radioAuto = fsSettings['radioAuto']
             fsconfig.radioInfo = fsSettings['radioInfo']
+            fsconfig.radioHiPQTools = fsSettings['radioHiPQTools']
             
             fsconfig.key60hz = fsSettings['key60hz']
             fsconfig.key59hz = fsSettings['key59hz']
@@ -304,6 +308,7 @@ def loadSettings():
             fsconfig.key23hz = fsSettings['key23hz']
             fsconfig.keyAuto = fsSettings['keyAuto']
             fsconfig.keyInfo = fsSettings['keyInfo']
+            fsconfig.keyHiPQTools = fsSettings['keyHiPQTools']
             
             fsconfig.status60hz = fsSettings['status60hz']
             fsconfig.status59hz = fsSettings['status59hz']
@@ -312,6 +317,7 @@ def loadSettings():
             fsconfig.status23hz = fsSettings['status23hz']
             fsconfig.statusAuto = fsSettings['statusAuto']
             fsconfig.statusInfo = fsSettings['statusInfo']
+            fsconfig.statusHiPQTools = fsSettings['statusHiPQTools']
         
             fsconfig.keymapRes = fsSettings['keymapRes']
                  
@@ -344,6 +350,7 @@ def saveSettings():
     fsSettings['radio23hz'] = fsconfig.radio23hz
     fsSettings['radioAuto'] = fsconfig.radioAuto
     fsSettings['radioInfo'] = fsconfig.radioInfo
+    fsSettings['radioHiPQTools'] = fsconfig.radioHiPQTools
 
     fsSettings['key60hz'] = fsconfig.key60hz
     fsSettings['key59hz'] = fsconfig.key59hz
@@ -352,6 +359,7 @@ def saveSettings():
     fsSettings['key23hz'] = fsconfig.key23hz
     fsSettings['keyAuto'] = fsconfig.keyAuto
     fsSettings['keyInfo'] = fsconfig.keyInfo
+    fsSettings['keyHiPQTools'] = fsconfig.keyHiPQTools
     
     fsSettings['status60hz'] = fsconfig.status60hz
     fsSettings['status59hz'] = fsconfig.status59hz
@@ -360,6 +368,7 @@ def saveSettings():
     fsSettings['status23hz'] = fsconfig.status23hz
     fsSettings['statusAuto'] = fsconfig.statusAuto
     fsSettings['statusInfo'] = fsconfig.statusInfo
+    fsSettings['statusHiPQTools'] = fsconfig.statusHiPQTools
 
     fsSettings['keymapRes'] = fsconfig.keymapRes
 

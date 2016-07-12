@@ -1,3 +1,4 @@
+import os
 import sys
 import xbmcgui
 import fswitch_window as fswin
@@ -54,6 +55,8 @@ class Main:
                 scriptMode = 'AutoSet'
             elif scriptArg == 'info':
                 scriptMode = 'ShowInfo'
+            elif scriptArg == 'hipqtools':
+                scriptMode = 'StartHiPQTools'
 
         # create default settings (if they don't already exist)
         fsconfigutil.createAllSettingsFiles()
@@ -85,6 +88,13 @@ class Main:
                 fsmsg.notifyQuickWarn('Frequency Switcher', setModeStatus)    
             else:
                 fsmsg.notifyInfo('Frequency Switcher', setModeStatus)
+
+        elif scriptMode == 'StartHiPQTools':
+            # start HiMedia PQTools
+			os.system('am startservice --user 0 -W -n com.hisilicon.android.pqsetting/com.hisilicon.android.pqsetting.MainService')
+              
+            # display notification
+			fsmsg.notifyInfo('HiMedia PQTools', '   Running...')
 
         elif scriptMode == 'ShowInfo':
             fsconfigutil.loadActiveInfoSetting()
