@@ -1,5 +1,6 @@
 import xbmc
 import xbmcgui
+import xbmcaddon
 import os
 import fswitch_config as fsconfig
 import fswitch_configutil as fsconfigutil
@@ -7,6 +8,7 @@ import fswitch_util as fsutil
 import fswitch_keylisten as fskeylisten
 
 from pyxbmct.addonwindow import *
+from shutil import copyfile
 
 class MapKeysWindow(AddonDialogWindow):
 
@@ -1337,7 +1339,7 @@ class MainWindow(AddonDialogWindow):
         super(MainWindow, self).__init__(title)
 
         # set window width + height, and grid rows + columns
-        self.setGeometry(750, 650, 12, 13)
+        self.setGeometry(1050, 650, 12, 13)
 
         self.labelInfoTitle = Label('', alignment=ALIGN_LEFT)
         self.placeControl(self.labelInfoTitle, 1, 1, columnspan=8)
@@ -1347,25 +1349,37 @@ class MainWindow(AddonDialogWindow):
         
         # create and place objects
         self.buttonWindowMapEvents = Button('Service')
-        self.placeControl(self.buttonWindowMapEvents, 4, 1, columnspan=5)
+        self.placeControl(self.buttonWindowMapEvents, 3, 1, columnspan=5)
         
         self.buttonWindowConfig = Button('Frame Rates')
-        self.placeControl(self.buttonWindowConfig, 5, 1, columnspan=5)
+        self.placeControl(self.buttonWindowConfig, 4, 1, columnspan=5)
 
         self.buttonWindowMapKeys = Button('Map Keys')
-        self.placeControl(self.buttonWindowMapKeys, 6, 1, columnspan=5)
+        self.placeControl(self.buttonWindowMapKeys, 5, 1, columnspan=5)
+
+        self.buttonCopyMapKeys = Button('Copy Default Map Keys')
+        self.placeControl(self.buttonCopyMapKeys, 6, 1, columnspan=5)
+
+        self.buttonCopyPlayercorefactory = Button('Playes')
+        self.placeControl(self.buttonCopyPlayercorefactory, 8, 1, columnspan=5)
 
         self.buttonCleanup = Button('Clean Up')
-        self.placeControl(self.buttonCleanup, 8, 1, columnspan=5)
+        self.placeControl(self.buttonCleanup, 10, 1, columnspan=5)
 
         self.labelInfoStatus1 = Label('', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelInfoStatus1, 4, 7, columnspan=8, pad_y=11)
+        self.placeControl(self.labelInfoStatus1, 3, 7, columnspan=8, pad_y=11)
 
         self.labelInfoStatus2 = Label('', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelInfoStatus2, 6, 7, columnspan=8, pad_y=11)
+        self.placeControl(self.labelInfoStatus2, 5, 7, columnspan=8, pad_y=11)
+
+        self.labelDefaultMapKeysStatus = Label('( Suggested buttons map for Addon and Kodi )', alignment=ALIGN_LEFT)
+        self.placeControl(self.labelDefaultMapKeysStatus, 6, 7, columnspan=8, pad_y=11)
+
+        self.labelCopyPlayercorefactoryStatus = Label('( Copy playercorefactory.xml with priority players )', alignment=ALIGN_LEFT)
+        self.placeControl(self.labelCopyPlayercorefactoryStatus, 8, 7, columnspan=8, pad_y=11)
 
         self.labelCleanupStatus = Label('', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelCleanupStatus, 8, 7, columnspan=8, pad_y=11)
+        self.placeControl(self.labelCleanupStatus, 10, 7, columnspan=8, pad_y=11)
         # check platform type
         self.checkPlatformType()       
         self.checkDisplayModeFileStatus()
@@ -1375,6 +1389,8 @@ class MainWindow(AddonDialogWindow):
         self.connect(self.buttonWindowMapEvents, self.windowMapEvents)
         self.connect(self.buttonWindowConfig, self.windowConfig)
         self.connect(self.buttonWindowMapKeys, self.windowMapKeys)
+        self.connect(self.buttonCopyMapKeys, self.DefaultMapKeys)
+        self.connect(self.buttonCopyPlayercorefactory, self.CopyPlayercorefactory)
         self.connect(self.buttonCleanup, self.cleanup)
         self.connect(ACTION_NAV_BACK, self.close)
 
@@ -1385,11 +1401,55 @@ class MainWindow(AddonDialogWindow):
         self.buttonWindowConfig.controlDown(self.buttonWindowMapKeys)
         self.buttonWindowMapKeys.controlUp(self.buttonWindowConfig)
 
-        self.buttonWindowMapKeys.controlDown(self.buttonCleanup)
-        self.buttonCleanup.controlUp(self.buttonWindowMapKeys)
+        self.buttonWindowMapKeys.controlDown(self.buttonCopyMapKeys)
+        self.buttonCopyMapKeys.controlUp(self.buttonWindowMapKeys)
+
+        self.buttonCopyMapKeys.controlDown(self.buttonCopyPlayercorefactory)
+        self.buttonCopyPlayercorefactory.controlUp(self.buttonCopyMapKeys)
+
+        self.buttonCopyPlayercorefactory.controlDown(self.buttonCleanup)
+        self.buttonCleanup.controlUp(self.buttonCopyPlayercorefactory)
 
         # set initial focus
         self.setFocus(self.buttonWindowMapEvents)
+                      
+    def DefaultMapKeys(self):
+        # config key
+        #mapKeyResetStatus = fsutil.mapKeyReset()
+        fsconfig.keyInfo =  '61489'
+        fsconfig.radioInfo = True
+        fsconfig.statusInfo = 'Active'
+        fsconfig.keyHiPQTools =  '61490'
+        fsconfig.radioHiPQTools = True
+        fsconfig.statusHiPQTools = 'Active'
+        saveSettingsStatus = fsconfigutil.saveSettings()
+        # key map file
+        _addon = xbmcaddon.Addon()
+        addon_path = _addon.getAddonInfo('path').decode('utf-8')
+        addon_File = os.path.join(addon_path,'resources/maps/' 'zswitch.xml')
+        addon_FileKodi = os.path.join(addon_path,'resources/maps/' 'gen.xml')
+        keymapFolder = xbmc.translatePath('special://userdata/keymaps')
+        keymapFile = os.path.join(keymapFolder, 'zswitch.xml')
+        keymapFileGen = os.path.join(keymapFolder, 'gen.xml')
+        try:
+            copyfile(addon_File, keymapFile)
+            copyfile(addon_FileKodi, keymapFileGen)
+            self.labelDefaultMapKeysStatus.setLabel('keys map files copied')
+        except Exception:
+            self.labelDefaultMapKeysStatus.setLabel('Failed to activate keys')
+
+    def CopyPlayercorefactory(self):
+        # playercorefactory file
+        _addon = xbmcaddon.Addon()
+        addon_path = _addon.getAddonInfo('path').decode('utf-8')
+        addon_File = os.path.join(addon_path,'resources/playercorefactory/' 'playercorefactory.xml')
+        userFolder = xbmc.translatePath('special://userdata')
+        File = os.path.join(userFolder, 'playercorefactory.xml')
+        try:
+            copyfile(addon_File, File)
+            self.labelCopyPlayercorefactoryStatus.setLabel('playercorefactory.xml copied')
+        except Exception:
+            self.labelCopyPlayercorefactoryStatus.setLabel('Failed to activate playercorefactory.xml')
                       
     def windowConfig(self):
         

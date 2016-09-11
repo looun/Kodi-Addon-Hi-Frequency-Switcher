@@ -91,10 +91,10 @@ class Main:
 
         elif scriptMode == 'StartHiPQTools':
             # start HiMedia PQTools
-			os.system('am startservice --user 0 -W -n com.hisilicon.android.pqsetting/com.hisilicon.android.pqsetting.MainService')
+            os.system('am startservice --user 0 -W -n com.hisilicon.android.pqsetting/com.hisilicon.android.pqsetting.MainService')
               
             # display notification
-			fsmsg.notifyInfo('HiMedia PQTools', '   Running...')
+            fsmsg.notifyInfo('HiMedia PQTools', '   Running...')
 
         elif scriptMode == 'ShowInfo':
             fsconfigutil.loadActiveInfoSetting()
