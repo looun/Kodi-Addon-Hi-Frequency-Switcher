@@ -21,7 +21,7 @@ def getSourceFPS():
     videoFPSValue = None
     
     # get location of log file
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
+    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
         logFileName = xbmc.translatePath('special://temp') + xbmc.translatePath('special://temp')[xbmc.translatePath('special://temp').find('files')+7:xbmc.translatePath('special://temp').find('temp')].replace('/','') + '.log'
 
     elif fsconfig.osPlatform == 'Windows 7':
@@ -139,7 +139,7 @@ def getDisplayMode():
     modeFileAndroid = "/proc/msp/disp1"
     modeFileWindows = "d:\\x8mode.txt"
  
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
+    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
         modeFile = modeFileAndroid
     elif fsconfig.osPlatform == 'Windows 7':
         modeFile = modeFileWindows 
@@ -154,7 +154,10 @@ def getDisplayMode():
             with open(modeFile, 'r') as modeFileHandle:      
                 # hisiliconMode = modeFileHandle.readline().strip()
                 hisiliconMode = modeFileHandle.read().splitlines()
-                hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
+                if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                    hisiliconMode = hisiliconMode[2].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
+                if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
+                    hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
                 print hisiliconMode 
                 # convert HISILICON output mode to more descriptive mode
                 if hisiliconMode == '2160p60':
@@ -211,7 +214,7 @@ def getDisplayModeFileStatus():
     modeFileAndroid = "/proc/msp/disp1"
     modeFileWindows = "d:\\x8mode.txt"
  
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
+    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
         modeFile = modeFileAndroid
     elif fsconfig.osPlatform == 'Windows 7':
         modeFile = modeFileWindows 
@@ -249,48 +252,68 @@ def setDisplayMode(newOutputMode):
         if newOutputMode == '1080p-60hz':
             newHisiliconMode = '1080p60'
             newFMT = '0'
-        elif newOutputMode == '1080p-59hz':
-            newHisiliconMode = '1080p59.94'
-            newFMT = '77'
         elif newOutputMode == '1080p-50hz':
             newHisiliconMode = '1080p50'
             newFMT = '1'
         elif newOutputMode == '1080p-24hz':
             newHisiliconMode = '1080p24'
             newFMT = '4'
-        elif newOutputMode == '1080p-23hz':
-            newHisiliconMode = '1080p23.976'
-            newFMT = '79'
-        elif newOutputMode == '2160p-60hz':
-            newHisiliconMode = '2160p60'
-            newFMT = '68'
-        elif newOutputMode == '2160p-29hz':
-            newHisiliconMode = '2160p29.970'
-            newFMT = '75'  
-        elif newOutputMode == '2160p-59hz':
-            newHisiliconMode = '2160p59.940'
-            newFMT = '68'
-        elif newOutputMode == '2160p-50hz':
-            newHisiliconMode = '2160p50'
-            newFMT = '67'
-        elif newOutputMode == '2160p-25hz':
-            newHisiliconMode = '2160p25'
-            newFMT = '65'
-        elif newOutputMode == '2160p-24hz':
-            newHisiliconMode = '2160p24'
-            newFMT = '64'
-        elif newOutputMode == '2160p-23hz':
-            newHisiliconMode = '2160p23.976'
-            newFMT = '74'
         elif newOutputMode == '720p-60hz':
             newHisiliconMode = '720p60'
             newFMT = '7'
-        elif newOutputMode == '720p-59hz':
-            newHisiliconMode = '720p59.94'
-            newFMT = '76'
         elif newOutputMode == '720p-50hz':
             newHisiliconMode = '720p50'
             newFMT = '8'
+        elif newOutputMode == '2160p-25hz':
+            newHisiliconMode = '2160p25'
+            newFMT = '65'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '257'
+        elif newOutputMode == '2160p-24hz':
+            newHisiliconMode = '2160p24'
+            newFMT = '64'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '256'
+        elif newOutputMode == '2160p-50hz':
+            newHisiliconMode = '2160p50'
+            newFMT = '67'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '257'
+        elif newOutputMode == '2160p-60hz':
+            newHisiliconMode = '2160p60'
+            newFMT = '68'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '258'
+        elif newOutputMode == '2160p-59hz':
+            newHisiliconMode = '2160p59.940'
+            newFMT = '68'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '258'
+        elif newOutputMode == '2160p-23hz':
+            newHisiliconMode = '2160p23.976'
+            newFMT = '74'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '260'
+        elif newOutputMode == '2160p-29hz':
+            newHisiliconMode = '2160p29.970'
+            newFMT = '75'  
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '261'
+        elif newOutputMode == '720p-59hz':
+            newHisiliconMode = '720p59.94'
+            newFMT = '76'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '262'
+        elif newOutputMode == '1080p-59hz':
+            newHisiliconMode = '1080p59.94'
+            newFMT = '77'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '263'
+        elif newOutputMode == '1080p-23hz':
+            newHisiliconMode = '1080p23.976'
+            newFMT = '79'
+            if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                newFMT = '265'
         else:
             setModeStatus = 'Unsupported mode requested.'
             statusType = 'warn'

@@ -1,3 +1,30 @@
+v 3.4
+- compatibility with Q5/Q10 4K 3D:
+  only h.264 720/1080 Hardware decoding 
+
+v 3.3.3
+- HiPQTools key map for PQSetting pop-up windows  gr_haha 
+
+v 3.3.2
+- bug fix
+- NEW debug info with system infromation
+
+v 3.3
+- addon compatibility with SPMC
+
+v 3.2 
+- fix UHD issues
+
+v 3.0 beta
+- add support for UHD resolution
+
+v 2.1
+- add support for: 23,976, 29.970, 59.940
+
+------------------------------------------------------
+* Hisilicon/Himedia
+------------------------------------------------------
+
 v1.3.1
 - Fix for auto switching DVD-ISO and IMG files
 - Improved source frame rate detection

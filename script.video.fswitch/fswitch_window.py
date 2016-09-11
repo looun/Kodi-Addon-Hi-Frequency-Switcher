@@ -1433,7 +1433,7 @@ class MainWindow(AddonDialogWindow):
             fsconfig.osPlatform = 'unknown'
             self.disableAll()
             
-        elif osVariant == 'HiSTBAndroidV6 Hi3798CV200':
+        elif osVariant == 'HiSTBAndroidV6 Hi3798CV200' or osVariant == 'HiSTBAndroidV5 Hi3798CV100':
             self.labelInfoTitle.setLabel(osVariant)
             fsconfig.osPlatform = osVariant
 
@@ -1622,7 +1622,7 @@ class InfoPanel():
             labelCurrentFps.setLabel(currentFPS)
 
             # Current HiMedia disp1 --------------------------------------------------------------------------------------------------------------------------------------------------------
-            # labelCurrentDisp1Title = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentDISP1, font='font12')
+            # labelCurrentDisp1Title = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentDISP1, font='font8')
             modeFile = "/proc/msp/disp1"
             labelCurrentDisp1 = xbmcgui.ControlLabel(100, panelLineTop + (panelLineSpacing * 3), 600, 600, '', font='font8')
 
@@ -1631,7 +1631,7 @@ class InfoPanel():
             labelCurrentDisp1.setLabel(currentDisp1)
 
             # Current HiMedia HDMI0 --------------------------------------------------------------------------------------------------------------------------------------------------------
-            # labelCurrentHdmi0Title = xbmcgui.ControlLabel(750, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentHDMI0, font='font12')
+            # labelCurrentHdmi0Title = xbmcgui.ControlLabel(750, panelLineTop + (panelLineSpacing * 3), 150, 20, descCurrentHDMI0, font='font8')
             modeFile = "/proc/msp/hdmi0"
             labelCurrentHdmi0 = xbmcgui.ControlLabel(700, panelLineTop - (panelLineSpacing * 1), 600, 600, '', font='font8')
 
