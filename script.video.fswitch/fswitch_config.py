@@ -4,6 +4,8 @@ osPlatform = None
 # service config
 radioOnPlayStop60 = None
 radioOnPlayStop50 = None
+radioOnPlayStop24 = None
+radioOnPlayStop23 = None
 radioNotifyOn = None
 
 # service flags

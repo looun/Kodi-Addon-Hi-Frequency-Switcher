@@ -53,7 +53,7 @@ class fsPlayer(xbmc.Player):
         # only switch on video files (not audio)
         if fsconfig.lastPlayedMediaType == 'video':
 
-            if fsconfig.radioOnPlayStop60 or fsconfig.radioOnPlayStop50:
+            if fsconfig.radioOnPlayStop60 or fsconfig.radioOnPlayStop50 or fsconfig.radioOnPlayStop24 or fsconfig.radioOnPlayStop23:
 
                 # check current display mode setting
                 currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
@@ -74,8 +74,12 @@ class fsPlayer(xbmc.Player):
                     # set the output mode
                     if fsconfig.radioOnPlayStop60:
                         setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-60hz')
-                    else:
+                    elif fsconfig.radioOnPlayStop50:
                         setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-50hz')
+                    elif fsconfig.radioOnPlayStop24:
+                        setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-24hz')
+                    else:
+                        setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-23hz')
                   
                 # display notification
                 if statusType == 'warn':

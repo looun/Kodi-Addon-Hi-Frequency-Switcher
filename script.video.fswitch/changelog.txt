@@ -1,3 +1,6 @@
+v 3.5
+- add service set mode 23.976 hz, 24 hz on playback stop
+
 v 3.4.3
 - add Remote Controll "default" mapping key
 - add Copy playercorefactory.xml

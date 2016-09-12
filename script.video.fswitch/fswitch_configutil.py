@@ -264,6 +264,8 @@ def resetServiceConfigFile():
     # service config
     fsSettings['radioOnPlayStop60'] = False
     fsSettings['radioOnPlayStop50'] = False
+    fsSettings['radioOnPlayStop24'] = False
+    fsSettings['radioOnPlayStop23'] = False
     fsSettings['radioNotifyOn'] = True
     
     # create or overwrite settings file
@@ -580,6 +582,8 @@ def loadServiceConfig():
             # service config
             fsconfig.radioOnPlayStop60 = fsSettings['radioOnPlayStop60']
             fsconfig.radioOnPlayStop50 = fsSettings['radioOnPlayStop50']
+            fsconfig.radioOnPlayStop24 = fsSettings['radioOnPlayStop24']
+            fsconfig.radioOnPlayStop23 = fsSettings['radioOnPlayStop23']
             fsconfig.radioNotifyOn = fsSettings['radioNotifyOn']
             
         loadSettingsStatus = 'Loaded service configuration'
@@ -597,6 +601,8 @@ def saveServiceConfig():
     # service
     fsSettings['radioOnPlayStop60'] = fsconfig.radioOnPlayStop60
     fsSettings['radioOnPlayStop50'] = fsconfig.radioOnPlayStop50
+    fsSettings['radioOnPlayStop24'] = fsconfig.radioOnPlayStop24
+    fsSettings['radioOnPlayStop23'] = fsconfig.radioOnPlayStop23
     fsSettings['radioNotifyOn'] = fsconfig.radioNotifyOn
 
     # create or overwrite settings file

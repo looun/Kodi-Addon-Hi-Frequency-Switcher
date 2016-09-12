@@ -1150,25 +1150,39 @@ class MapEventsWindow(AddonDialogWindow):
         self.placeControl(self.labelActiveService, 2, 2, columnspan=20, pad_y=11)    
 
         self.radioOnPlayStart = RadioButton('Playback Starts')
-        self.placeControl(self.radioOnPlayStart, 4, 2, columnspan=8)
+        self.placeControl(self.radioOnPlayStart, 3, 2, columnspan=8)
         self.radioOnPlayStart.setSelected(fsconfig.radioOnPlayStart)
 
         self.labelOnPlayStart = Label('Auto-set HDMI mode on playback start', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelOnPlayStart, 4, 11, columnspan=14, pad_y=11)    
+        self.placeControl(self.labelOnPlayStart, 3, 11, columnspan=14, pad_y=11)    
          
         self.radioOnPlayStop60 = RadioButton('Default 60 hz')
-        self.placeControl(self.radioOnPlayStop60, 5, 2, columnspan=8)
+        self.placeControl(self.radioOnPlayStop60, 4, 2, columnspan=8)
         self.radioOnPlayStop60.setSelected(fsconfig.radioOnPlayStop60)
  
         self.labelOnPlayStop60 = Label('Set mode to 60 hz on playback stop', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelOnPlayStop60, 5, 11, columnspan=14, pad_y=11)    
+        self.placeControl(self.labelOnPlayStop60, 4, 11, columnspan=14, pad_y=11)    
 
         self.radioOnPlayStop50 = RadioButton('Default 50 hz')
-        self.placeControl(self.radioOnPlayStop50, 6, 2, columnspan=8)
+        self.placeControl(self.radioOnPlayStop50, 5, 2, columnspan=8)
         self.radioOnPlayStop50.setSelected(fsconfig.radioOnPlayStop50)
  
         self.labelOnPlayStop50 = Label('Set mode to 50 hz on playback stop', alignment=ALIGN_LEFT)
-        self.placeControl(self.labelOnPlayStop50, 6, 11, columnspan=14, pad_y=11)    
+        self.placeControl(self.labelOnPlayStop50, 5, 11, columnspan=14, pad_y=11)    
+
+        self.radioOnPlayStop24 = RadioButton('Default 24 hz')
+        self.placeControl(self.radioOnPlayStop24, 6, 2, columnspan=8)
+        self.radioOnPlayStop24.setSelected(fsconfig.radioOnPlayStop24)
+ 
+        self.labelOnPlayStop24 = Label('Set mode to 24 hz on playback stop', alignment=ALIGN_LEFT)
+        self.placeControl(self.labelOnPlayStop24, 6, 11, columnspan=14, pad_y=11)    
+
+        self.radioOnPlayStop23 = RadioButton('Default 23.97 hz')
+        self.placeControl(self.radioOnPlayStop23, 7, 2, columnspan=8)
+        self.radioOnPlayStop23.setSelected(fsconfig.radioOnPlayStop23)
+ 
+        self.labelOnPlayStop23 = Label('Set mode to 23.976 hz on playback stop', alignment=ALIGN_LEFT)
+        self.placeControl(self.labelOnPlayStop23, 7, 11, columnspan=14, pad_y=11)    
 
         self.radioNotifyOn = RadioButton('')
         self.placeControl(self.radioNotifyOn, 8, 2, columnspan=8)
@@ -1204,6 +1218,8 @@ class MapEventsWindow(AddonDialogWindow):
         self.connect(self.radioOnPlayStart, self.clickRadioOnPlayStart)
         self.connect(self.radioOnPlayStop60, self.clickRadioOnPlayStop60)
         self.connect(self.radioOnPlayStop50, self.clickRadioOnPlayStop50)
+        self.connect(self.radioOnPlayStop24, self.clickRadioOnPlayStop24)
+        self.connect(self.radioOnPlayStop23, self.clickRadioOnPlayStop23)
         self.connect(self.radioNotifyOn, self.clickRadioNotifyOn)
         self.connect(self.buttonConfigSave, self.clickConfigSave)
         self.connect(ACTION_NAV_BACK, self.close)
@@ -1212,6 +1228,8 @@ class MapEventsWindow(AddonDialogWindow):
         self.checkIfActive()
         self.clickRadioOnPlayStop60()
         self.clickRadioOnPlayStop50()
+        self.clickRadioOnPlayStop24()
+        self.clickRadioOnPlayStop23()
         self.clickRadioNotifyOn()
         self.clickRadioOnPlayStart()
 
@@ -1222,8 +1240,14 @@ class MapEventsWindow(AddonDialogWindow):
         self.radioOnPlayStop60.controlDown(self.radioOnPlayStop50)
         self.radioOnPlayStop50.controlUp(self.radioOnPlayStop60)
         
-        self.radioOnPlayStop50.controlDown(self.radioNotifyOn)
-        self.radioNotifyOn.controlUp(self.radioOnPlayStop50)
+        self.radioOnPlayStop50.controlDown(self.radioOnPlayStop24)
+        self.radioOnPlayStop24.controlUp(self.radioOnPlayStop50)
+
+        self.radioOnPlayStop24.controlDown(self.radioOnPlayStop23)
+        self.radioOnPlayStop23.controlUp(self.radioOnPlayStop24)
+
+        self.radioOnPlayStop23.controlDown(self.radioNotifyOn)
+        self.radioNotifyOn.controlUp(self.radioOnPlayStop23)
 
         self.radioNotifyOn.controlDown(self.buttonConfigSave)
         self.buttonConfigSave.controlUp(self.radioNotifyOn)
@@ -1236,15 +1260,23 @@ class MapEventsWindow(AddonDialogWindow):
             self.labelOnPlayStart.setEnabled(True)
             self.radioOnPlayStop60.setEnabled(True)
             self.radioOnPlayStop50.setEnabled(True)
+            self.radioOnPlayStop24.setEnabled(True)
+            self.radioOnPlayStop23.setEnabled(True)
             self.clickRadioOnPlayStop60()
             self.clickRadioOnPlayStop50()
+            self.clickRadioOnPlayStop24()
+            self.clickRadioOnPlayStop23()
             self.radioNotifyOn.setEnabled(True)
         else:
             self.labelOnPlayStart.setEnabled(False)            
             self.radioOnPlayStop60.setEnabled(False)
             self.radioOnPlayStop50.setEnabled(False)
+            self.radioOnPlayStop24.setEnabled(False)
+            self.radioOnPlayStop23.setEnabled(False)
             self.labelOnPlayStop60.setEnabled(False)
             self.labelOnPlayStop50.setEnabled(False)
+            self.labelOnPlayStop24.setEnabled(False)
+            self.labelOnPlayStop23.setEnabled(False)
             self.radioNotifyOn.setEnabled(False)
         
         self.checkIfActive()
@@ -1253,7 +1285,11 @@ class MapEventsWindow(AddonDialogWindow):
         if self.radioOnPlayStop60.isSelected():
             self.labelOnPlayStop60.setEnabled(True)
             self.radioOnPlayStop50.setSelected(False)
+            self.radioOnPlayStop24.setSelected(False)
+            self.radioOnPlayStop23.setSelected(False)
             self.labelOnPlayStop50.setEnabled(False)
+            self.labelOnPlayStop24.setEnabled(False)
+            self.labelOnPlayStop23.setEnabled(False)
         else:
             self.labelOnPlayStop60.setEnabled(False)            
 
@@ -1263,12 +1299,44 @@ class MapEventsWindow(AddonDialogWindow):
         if self.radioOnPlayStop50.isSelected():
             self.labelOnPlayStop50.setEnabled(True)
             self.radioOnPlayStop60.setSelected(False)
+            self.radioOnPlayStop24.setSelected(False)
+            self.radioOnPlayStop23.setSelected(False)
             self.labelOnPlayStop60.setEnabled(False)
+            self.labelOnPlayStop24.setEnabled(False)
+            self.labelOnPlayStop23.setEnabled(False)
         else:
             self.labelOnPlayStop50.setEnabled(False)            
 
         self.checkIfActive()
         
+    def clickRadioOnPlayStop24(self):
+        if self.radioOnPlayStop24.isSelected():
+            self.labelOnPlayStop24.setEnabled(True)
+            self.radioOnPlayStop60.setSelected(False)
+            self.radioOnPlayStop50.setSelected(False)
+            self.radioOnPlayStop23.setSelected(False)
+            self.labelOnPlayStop60.setEnabled(False)
+            self.labelOnPlayStop50.setEnabled(False)
+            self.labelOnPlayStop23.setEnabled(False)
+        else:
+            self.labelOnPlayStop24.setEnabled(False)            
+
+        self.checkIfActive()
+
+    def clickRadioOnPlayStop23(self):
+        if self.radioOnPlayStop23.isSelected():
+            self.labelOnPlayStop23.setEnabled(True)
+            self.radioOnPlayStop60.setSelected(False)
+            self.radioOnPlayStop50.setSelected(False)
+            self.radioOnPlayStop24.setSelected(False)
+            self.labelOnPlayStop60.setEnabled(False)
+            self.labelOnPlayStop50.setEnabled(False)
+            self.labelOnPlayStop24.setEnabled(False)
+        else:
+            self.labelOnPlayStop23.setEnabled(False)            
+
+        self.checkIfActive()
+
     def checkIfActive(self):
         
         fsconfigutil.loadActiveServiceSetting()
@@ -1300,6 +1368,8 @@ class MapEventsWindow(AddonDialogWindow):
         fsconfig.radioOnPlayStart = self.radioOnPlayStart.isSelected()
         fsconfig.radioOnPlayStop60 = self.radioOnPlayStop60.isSelected()
         fsconfig.radioOnPlayStop50 = self.radioOnPlayStop50.isSelected()
+        fsconfig.radioOnPlayStop24 = self.radioOnPlayStop24.isSelected()
+        fsconfig.radioOnPlayStop23 = self.radioOnPlayStop23.isSelected()
         fsconfig.radioNotifyOn = self.radioNotifyOn.isSelected()
         
         saveSettingsStatus = fsconfigutil.saveSettings()
