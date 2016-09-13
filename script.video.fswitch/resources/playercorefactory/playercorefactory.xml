@@ -7,6 +7,9 @@
 		</player>
 </players>
 <rules action="prepend">
+<!-- 	<rule protocols="nfs|http" player="DVDPlayer"/> ! -->
+	<rule protocols="nfs|http" player="DVDPlayer" />
+	<rule filename="pvr.*.pvr" player="DVDPlayer"/>
 <!-- rule für mpeg2-files - alternativ funktioniert auch DVDPlayer  ! -->		
 	<rule name="mpeg2-file" videocodec="mpeg2" filetypes="mpg" player="HimediaXBMCWrapper"/>
 <!-- rule für divx-files - alternativ funktioniert auch DVDPlayer  ! -->		
@@ -15,8 +18,8 @@
 	<rule name="xvid" videocodec="xvid" player="HimediaXBMCWrapper"/>
 	<rule filename=".*.3D.*|.*.3D.iso|3D.*" player="HimediaXBMCWrapper"/>
 	<rule filetypes="iso|bdmv|mpls|m2ts" player="HimediaXBMCWrapper"/>
-<!-- 	<rule filetypes="mkv|avi|strm|mov|flv|mp4|webm|3gp" player="VideoPlayer"/> ! -->
-	<rule filetypes="mkv|strm|mov|flv|mp4|webm|3gp" player="VideoPlayer"/>
-	<rule video="true" player="DVDplayer"/>
+<!-- 	<rule filetypes="mkv|avi|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/> ! -->
+	<rule filetypes="mkv|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/>
+	<rule video="true" player="DVDPlayer"/>
 	</rules>
 </playercorefactory>

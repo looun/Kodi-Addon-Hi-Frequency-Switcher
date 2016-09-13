@@ -1706,7 +1706,7 @@ class InfoPanel():
             
             panelBorder = 10
             panelLineTop = panelTop + panelBorder
-            panelLineSpacing = 18
+            panelLineSpacing = 24
             panelLineCount = 32
             
             descHdmiMode = 'Output frequency:'
@@ -1718,8 +1718,8 @@ class InfoPanel():
             imageInfoPanel = xbmcgui.ControlImage(-200, panelTop, 1920, (panelBorder * 2) + (panelLineSpacing * panelLineCount), 'DialogBack2.png', colorDiffuse='0xBBBBBBBB')
 
             # Output Frequency ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            labelHdmiModeTitle = xbmcgui.ControlLabel(50, panelLineTop, 150, 20, descHdmiMode, font='font12')
-            labelHdmiMode = xbmcgui.ControlLabel(200, panelLineTop, 100, 20, '', font='font12')
+            labelHdmiModeTitle = xbmcgui.ControlLabel(50, panelLineTop, 250, 20, descHdmiMode, font='font12')
+            labelHdmiMode = xbmcgui.ControlLabel(260, panelLineTop, 100, 30, '', font='font12')
             
             # get current display mode setting
             currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
@@ -1731,8 +1731,8 @@ class InfoPanel():
             labelHdmiMode.setLabel(currentFreq)
             
             # Source FPS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            labelSourceFpsTitle = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 1), 150, 20, descSourceFPS, font='font12')
-            labelSourceFps = xbmcgui.ControlLabel(200, panelLineTop + (panelLineSpacing * 1), 100, 20, '', font='font12')
+            labelSourceFpsTitle = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 1), 250, 20, descSourceFPS, font='font12')
+            labelSourceFps = xbmcgui.ControlLabel(260, panelLineTop + (panelLineSpacing * 1), 100, 30, '', font='font12')
 
             # get FPS of currently playing video
             setModeStatus, statusType = fsutil.getCurrentFPS()
@@ -1743,8 +1743,8 @@ class InfoPanel():
                 labelSourceFps.setLabel('')
             
             # Current FPS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            labelCurrentFpsTitle = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 2), 150, 20, descCurrentFPS, font='font12')
-            labelCurrentFps = xbmcgui.ControlLabel(200, panelLineTop + (panelLineSpacing * 2), 100, 20, '', font='font12')
+            labelCurrentFpsTitle = xbmcgui.ControlLabel(50, panelLineTop + (panelLineSpacing * 2), 250, 20, descCurrentFPS, font='font12')
+            labelCurrentFps = xbmcgui.ControlLabel(260, panelLineTop + (panelLineSpacing * 2), 100, 30, '', font='font12')
 
             # get current rendered FPS
             currentFPS = xbmc.getInfoLabel('System.FPS')

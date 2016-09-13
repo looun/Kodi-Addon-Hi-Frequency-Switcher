@@ -108,7 +108,18 @@ def getSourceFPS():
 
             # found video open and FPS (if not 0.000) - stop parsing the list
             break
-                             
+    # check osPlatform linux2 (Krypton) 
+    osPlatform, osVariant = getPlatformType()
+
+    if osPlatform == 'linux2':
+        videoFPSValue = xbmc.getInfoLabel('Player.Process(VideoFps)')
+        videoFileName = os.path.join(xbmc.getInfoLabel('Player.Folderpath'), xbmc.getInfoLabel('Player.FileName'))
+
+        # save FPS for use in setDisplayModeAuto
+        fsconfig.lastDetectedFps = videoFPSValue
+        fsconfig.lastDetectedFile = videoFileName
+        fsconfigutil.saveLastDetectedFps()
+
     return videoFileName, videoFPSValue
 
 def getPlatformType():
@@ -119,7 +130,7 @@ def getPlatformType():
     if osPlatform == 'win32':
         osVariant = platform.system() + ' ' + platform.release()
 
-    elif osPlatform == 'linux3' or osPlatform == 'linux4':
+    elif osPlatform == 'linux2' or osPlatform == 'linux3' or osPlatform == 'linux4':
         productBrand = subprocess.Popen(['getprop', 'ro.product.brand'], stdout=subprocess.PIPE).communicate()[0].strip()
         productDevice = subprocess.Popen(['getprop', 'ro.product.device'], stdout=subprocess.PIPE).communicate()[0].strip()
         osVariant = productBrand + ' ' + productDevice
