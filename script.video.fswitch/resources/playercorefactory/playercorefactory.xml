@@ -10,8 +10,6 @@
 <!-- 	<rule protocols="nfs|http" player="DVDPlayer"/> ! -->
 	<rule protocols="nfs|http" player="DVDPlayer" />
 	<rule filename="pvr.*.pvr" player="DVDPlayer"/>
-<!-- rule für mpeg2-files - alternativ funktioniert auch DVDPlayer  ! -->		
-	<rule name="mpeg2-file" videocodec="mpeg2" filetypes="mpg" player="HimediaXBMCWrapper"/>
 <!-- rule für divx-files - alternativ funktioniert auch DVDPlayer  ! -->		
 	<rule name="divx" videocodec="divx" player="HimediaXBMCWrapper"/>
 <!-- rule für xvid-files - alternativ funktioniert auch DVDPlayer  ! -->		

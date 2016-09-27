@@ -1,6 +1,9 @@
+v 3.5.2
+- fix mpeg2 play with DVDPlayer
+
 v 3.5.1
 - add preliminary support Kodi 17
-- set nfs, http play with VideoPlayer SPMC/Kodi 16.1
+- set nfs, http play with DVDPlayer SPMC/Kodi 16.1
 
 v 3.5
 - add service set mode 23.976 hz, 24 hz on playback stop
