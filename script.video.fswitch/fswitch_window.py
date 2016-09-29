@@ -1430,7 +1430,7 @@ class MainWindow(AddonDialogWindow):
         self.buttonCopyMapKeys = Button('Copy Default Map Keys')
         self.placeControl(self.buttonCopyMapKeys, 6, 1, columnspan=5)
 
-        self.buttonCopyPlayercorefactory = Button('Playes')
+        self.buttonCopyPlayercorefactory = Button('Players')
         self.placeControl(self.buttonCopyPlayercorefactory, 8, 1, columnspan=5)
 
         self.buttonCleanup = Button('Clean Up')
