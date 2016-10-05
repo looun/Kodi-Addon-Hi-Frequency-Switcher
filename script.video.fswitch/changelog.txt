@@ -1,5 +1,6 @@
 v 3.5.4
 - remove from video add-on category
+- corected map key prev/next channel, chapter using pagedown/pageup remote buttons
 
 v 3.5.3
 - fix Players button label
