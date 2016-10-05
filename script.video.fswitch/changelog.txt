@@ -1,5 +1,8 @@
+v 3.5.4
+- remove from video add-on category
+
 v 3.5.3
-- fix button label
+- fix Players button label
 
 v 3.5.2
 - fix mpeg2 play with DVDPlayer
