@@ -109,11 +109,11 @@ def getSourceFPS():
             # found video open and FPS (if not 0.000) - stop parsing the list
             break
     # check osPlatform linux2 (Krypton) 
-    osPlatform, osVariant = getPlatformType()
+    osPlatform, osVariant, osSDK = getPlatformType()
 
     if osPlatform == 'linux2':
         videoFPSValue = xbmc.getInfoLabel('Player.Process(VideoFps)')
-        videoFileName = os.path.join(xbmc.getInfoLabel('Player.Folderpath'), xbmc.getInfoLabel('Player.FileName'))
+        videoFileName = os.path.join(xbmc.getInfoLabel('Player.Filenameandpath'))
 
         # save FPS for use in setDisplayModeAuto
         fsconfig.lastDetectedFps = videoFPSValue
@@ -133,12 +133,13 @@ def getPlatformType():
     elif osPlatform == 'linux2' or osPlatform == 'linux3' or osPlatform == 'linux4':
         productBrand = subprocess.Popen(['getprop', 'ro.product.brand'], stdout=subprocess.PIPE).communicate()[0].strip()
         productDevice = subprocess.Popen(['getprop', 'ro.product.device'], stdout=subprocess.PIPE).communicate()[0].strip()
+        osSDK = subprocess.Popen(['getprop', 'ro.build.version.sdk'], stdout=subprocess.PIPE).communicate()[0].strip()
         osVariant = productBrand + ' ' + productDevice
         
     else:
         osVariant = 'unsupported'
     
-    return osPlatform, osVariant
+    return osPlatform, osVariant, osSDK
 
 def getDisplayMode():
 # function to read the current output mode from display/mode
@@ -377,7 +378,11 @@ def setDisplayMode(newOutputMode):
                     # set new display mode
                     # with open(modeFile, 'w') as modeFileHandle: 
                        # modeFileHandle.write('fmt ' + newHisiliconMode)
-                    os.system('echo ' + newFMT + ' > /sdcard/setfmt')
+
+                    # check osSDK for workaround Android 7.0
+                    osPlatform, osVariant, osSDK = getPlatformType()
+                    if osSDK == '24':
+                        os.system('echo ' + newFMT + ' > /sdcard/setfmt')
                     os.system('disptest setfmt ' + newFMT)
                     # save time display mode was changed
                     fsconfig.lastFreqChange = int(time.time())

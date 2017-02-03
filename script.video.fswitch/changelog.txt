@@ -1,9 +1,11 @@
+v 3.5.7
+- fiz not switch for add-on in Kodi v17.0
+
 v 3.5.6
-- bump to new version
 - fix overwrite workaround Android 7.0 f/w
 
 v 3.5.5
-- fix DialogNotification Kodi 17
+- fix DialogNotification Kodi v17.0
 
 v 3.5.4
 - remove from video add-on category
@@ -16,7 +18,7 @@ v 3.5.2
 - fix mpeg2 play with DVDPlayer
 
 v 3.5.1
-- add preliminary support Kodi 17
+- add preliminary support Kodi v17.0
 - set nfs, http play with DVDPlayer SPMC/Kodi 16.1
 
 v 3.5

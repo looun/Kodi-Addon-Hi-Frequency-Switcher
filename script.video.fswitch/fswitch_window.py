@@ -1556,7 +1556,7 @@ class MainWindow(AddonDialogWindow):
         self.labelInfoTitle.setLabel('Detecting platform...')
         xbmc.sleep(200)
         
-        osPlatform, osVariant = fsutil.getPlatformType()
+        osPlatform, osVariant, ooSDK = fsutil.getPlatformType()
 
         if osPlatform is None:
             self.labelInfoTitle.setLabel('Failed to detect platform')
