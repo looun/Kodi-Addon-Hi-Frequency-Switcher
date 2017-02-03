@@ -1,3 +1,4 @@
+import sys
 import xbmc
 import xbmcaddon
 import xbmcgui
@@ -7,6 +8,12 @@ from threading import Timer
 
 # translate object
 translate = xbmcaddon.Addon().getLocalizedString
+
+osPlatform = sys.platform
+DialogXml = "DialogKaiToast.xml"
+
+if osPlatform == 'linux2':
+    DialogXml = "DialogNotification.xml"
 
 class KeyListener(xbmcgui.WindowXMLDialog):
     'function for getting pressed key code method and associated dialog window'
@@ -21,7 +28,7 @@ class KeyListener(xbmcgui.WindowXMLDialog):
 
     # object creation
     def __new__(cls):
-        return super(KeyListener, cls).__new__(cls, "DialogKaiToast.xml", "")
+        return super(KeyListener, cls).__new__(cls, DialogXml, "")
 
     # object initialization
     def __init__(self):
