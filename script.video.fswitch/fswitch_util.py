@@ -377,6 +377,7 @@ def setDisplayMode(newOutputMode):
                     # set new display mode
                     # with open(modeFile, 'w') as modeFileHandle: 
                        # modeFileHandle.write('fmt ' + newHisiliconMode)
+                    os.system('echo ' + newFMT + ' > /sdcard/setfmt')
                     os.system('disptest setfmt ' + newFMT)
                     # save time display mode was changed
                     fsconfig.lastFreqChange = int(time.time())
