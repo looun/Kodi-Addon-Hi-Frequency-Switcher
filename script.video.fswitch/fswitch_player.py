@@ -1,3 +1,4 @@
+import os
 import xbmc
 import fswitch_message as fsmsg
 import fswitch_util as fsutil
@@ -80,7 +81,10 @@ class fsPlayer(xbmc.Player):
                         setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-24hz')
                     else:
                         setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-23hz')
-                  
+
+                # display force 2D mode
+                os.system('echo 3dmode 0 > /proc/msp/hdmi0')
+                
                 # display notification
                 if statusType == 'warn':
                     fsmsg.notifyQuickWarn('Frequency Switcher', setModeStatus)    

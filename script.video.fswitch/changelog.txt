@@ -1,5 +1,8 @@
+v 3.5.8
+- add 3D autoswitch base on filename (http://kodi.wiki/view/3D)
+
 v 3.5.7
-- fiz not switch for add-on in Kodi v17.0
+- fix not switch for add-on in Kodi v17.0
 
 v 3.5.6
 - fix overwrite workaround Android 7.0 f/w

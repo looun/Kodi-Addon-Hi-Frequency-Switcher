@@ -113,7 +113,7 @@ def getSourceFPS():
 
     if osPlatform == 'linux2':
         videoFPSValue = xbmc.getInfoLabel('Player.Process(VideoFps)')
-        videoFileName = os.path.join(xbmc.getInfoLabel('Player.Filenameandpath'))
+        videoFileName = xbmc.getInfoLabel('Player.Filenameandpath')
 
         # save FPS for use in setDisplayModeAuto
         fsconfig.lastDetectedFps = videoFPSValue
@@ -350,7 +350,7 @@ def setDisplayMode(newOutputMode):
         if currentOutputMode == newOutputMode:
             setModeStatus = 'Frequency already set to ' + newFreq 
             statusType = 'warn'
-       
+      
         # current output mode is different to new output mode
         else:
             
@@ -384,6 +384,17 @@ def setDisplayMode(newOutputMode):
                     if osSDK == '24':
                         os.system('echo ' + newFMT + ' > /sdcard/setfmt')
                     os.system('disptest setfmt ' + newFMT)
+
+                    videoFileName, videoFPSValue = getSourceFPS()
+                    videoFileNameCheck = videoFileName.lower().replace('-','.').replace(' ','.')
+                    if ".3d." in videoFileNameCheck:
+                        if ".sbs." in videoFileNameCheck or ".hsbs." in videoFileNameCheck:
+                            os.system('echo 3dmode 4 > /proc/msp/hdmi0')
+                        elif ".tab." in videoFileNameCheck or ".ou." in videoFileNameCheck:
+                            os.system('echo 3dmode 2 > /proc/msp/hdmi0')
+                        elif ".htab." in videoFileNameCheck or ".hou." in videoFileNameCheck:
+                            os.system('echo 3dmode 2 > /proc/msp/hdmi0')
+                    
                     # save time display mode was changed
                     fsconfig.lastFreqChange = int(time.time())
                     fsconfigutil.saveLastFreqChangeSetting()
