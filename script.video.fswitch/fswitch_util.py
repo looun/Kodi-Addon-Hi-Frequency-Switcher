@@ -111,7 +111,7 @@ def getSourceFPS():
     # check osPlatform linux2 (Krypton) 
     osPlatform, osVariant, osSDK = getPlatformType()
 
-    if osPlatform == 'linux2':
+    if osPlatform == 'linux2' and videoFPSValue == None:
         videoFPSValue = xbmc.getInfoLabel('Player.Process(VideoFps)')
         videoFileName = xbmc.getInfoLabel('Player.Filenameandpath')
 
@@ -130,7 +130,7 @@ def getPlatformType():
     if osPlatform == 'win32':
         osVariant = platform.system() + ' ' + platform.release()
 
-    elif osPlatform == 'linux2' or osPlatform == 'linux3' or osPlatform == 'linux4':
+    elif xbmc.getCondVisibility('system.platform.linux') and xbmc.getCondVisibility('system.platform.android'):
         productBrand = subprocess.Popen(['getprop', 'ro.product.brand'], stdout=subprocess.PIPE).communicate()[0].strip()
         productDevice = subprocess.Popen(['getprop', 'ro.product.device'], stdout=subprocess.PIPE).communicate()[0].strip()
         osSDK = subprocess.Popen(['getprop', 'ro.build.version.sdk'], stdout=subprocess.PIPE).communicate()[0].strip()
@@ -379,21 +379,29 @@ def setDisplayMode(newOutputMode):
                     # with open(modeFile, 'w') as modeFileHandle: 
                        # modeFileHandle.write('fmt ' + newHisiliconMode)
 
-                    # check osSDK for workaround Android 7.0
-                    osPlatform, osVariant, osSDK = getPlatformType()
-                    if osSDK == '24':
-                        os.system('echo ' + newFMT + ' > /sdcard/setfmt')
-                    os.system('disptest setfmt ' + newFMT)
-
+                    # set 3Dmode base on filename
+                    mode3D = '0'
                     videoFileName, videoFPSValue = getSourceFPS()
                     videoFileNameCheck = videoFileName.lower().replace('-','.').replace(' ','.')
                     if ".3d." in videoFileNameCheck:
                         if ".sbs." in videoFileNameCheck or ".hsbs." in videoFileNameCheck:
-                            os.system('echo 3dmode 4 > /proc/msp/hdmi0')
+                            mode3D = '4'
                         elif ".tab." in videoFileNameCheck or ".ou." in videoFileNameCheck:
-                            os.system('echo 3dmode 2 > /proc/msp/hdmi0')
+                            mode3D = '2'
                         elif ".htab." in videoFileNameCheck or ".hou." in videoFileNameCheck:
-                            os.system('echo 3dmode 2 > /proc/msp/hdmi0')
+                            mode3D = '2'
+                    
+                    # check osSDK for workaround Android 7.0
+                    osPlatform, osVariant, osSDK = getPlatformType()
+                    if osSDK == '24':
+                        os.system('echo ' + newFMT + ' > /sdcard/setfmt')
+                        os.system('echo ' + mode3D + ' > /sdcard/mode3D')
+                    if os.access('/system/bin/disptest', os.W_OK):
+                        os.system('disptest setfmt ' + newFMT)
+                    else:
+                        os.system('hidisp setfmt ' + newFMT)
+                    os.system('echo 3dmode ' + mode3D + ' > /proc/msp/hdmi0')
+                    # os.system('echo deepclr 2 > /proc/msp/hdmi0')
                     
                     # save time display mode was changed
                     fsconfig.lastFreqChange = int(time.time())

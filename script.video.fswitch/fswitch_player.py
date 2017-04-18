@@ -83,6 +83,9 @@ class fsPlayer(xbmc.Player):
                         setModeStatus, statusType = fsutil.setDisplayMode(currentRes + '-23hz')
 
                 # display force 2D mode
+                osPlatform, osVariant, osSDK = fsutil.getPlatformType()
+                if osSDK == '24':
+                    os.system('echo 0 > /sdcard/mode3D')
                 os.system('echo 3dmode 0 > /proc/msp/hdmi0')
                 
                 # display notification
