@@ -396,10 +396,8 @@ def setDisplayMode(newOutputMode):
                     if osSDK == '24':
                         os.system('echo ' + newFMT + ' > /sdcard/setfmt')
                         os.system('echo ' + mode3D + ' > /sdcard/mode3D')
-                    if os.access('/system/bin/disptest', os.W_OK):
-                        os.system('disptest setfmt ' + newFMT)
                     else:
-                        os.system('hidisp setfmt ' + newFMT)
+                        os.system('disptest setfmt ' + newFMT)
                     os.system('echo 3dmode ' + mode3D + ' > /proc/msp/hdmi0')
                     # os.system('echo deepclr 2 > /proc/msp/hdmi0')
                     

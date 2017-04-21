@@ -1,3 +1,6 @@
+v 3.5.9.1
+- fix regression Andoid 5.1.1
+
 v 3.5.9
 - improve for f/w 2.0.3 Android 7.0
 - part fix for SPMC after updated Phyton 31032017
