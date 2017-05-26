@@ -382,8 +382,8 @@ def setDisplayMode(newOutputMode):
                     # set 3Dmode base on filename
                     mode3D = '0'
                     videoFileName, videoFPSValue = getSourceFPS()
-                    videoFileNameCheck = videoFileName.lower().replace('-','.').replace(' ','.')
-                    if ".3d." in videoFileNameCheck:
+                    videoFileNameCheck = videoFileName.lower().replace('_','.').replace('-','.').replace(' ','.')
+                    if "3d." in videoFileNameCheck:
                         if ".sbs." in videoFileNameCheck or ".hsbs." in videoFileNameCheck:
                             mode3D = '4'
                         elif ".tab." in videoFileNameCheck or ".ou." in videoFileNameCheck:
