@@ -1727,7 +1727,7 @@ class InfoPanel():
             # get current frequency
             freqSplit = currentOutputMode.find('-') + 1
             # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
-            currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
+            currentFreq = currentHiSiliconMode.replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower().split("p")[1]
             labelHdmiMode.setLabel(currentFreq)
             
             # Source FPS ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1815,7 +1815,7 @@ class InfoPanel():
                     currentOutputMode, currentHiSiliconMode = fsutil.getDisplayMode()
                     freqSplit = currentOutputMode.find('-') + 1
                     # currentFreq = currentOutputMode[freqSplit:len(currentOutputMode)-2]
-                    currentFreq = currentHiSiliconMode.replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower().split("p")[1]
+                    currentFreq = currentHiSiliconMode.replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower().split("p")[1]
                     labelHdmiMode.setLabel(currentFreq)
 
                     # Update HiMedia Disp1 ------------------------------------------------------------------------------------------------------------------------------------------------------------------

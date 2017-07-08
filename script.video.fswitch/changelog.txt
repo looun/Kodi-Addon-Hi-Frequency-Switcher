@@ -1,3 +1,6 @@
+v 3.5.9.3
+- quick fix HiMedia FW v2.0.4
+
 v 3.5.9.2
 - small fix
 

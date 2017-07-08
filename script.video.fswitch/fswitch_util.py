@@ -167,9 +167,9 @@ def getDisplayMode():
                 # hisiliconMode = modeFileHandle.readline().strip()
                 hisiliconMode = modeFileHandle.read().splitlines()
                 if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-                    hisiliconMode = hisiliconMode[2].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
+                    hisiliconMode = hisiliconMode[2].split(":")[1].split("/")[0].replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower()
                 if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
-                    hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("_","P").replace("3840x","").replace("1920x","").replace("1280x","").lower()
+                    hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower()
                 print hisiliconMode 
                 # convert HISILICON output mode to more descriptive mode
                 if hisiliconMode == '2160p60':
