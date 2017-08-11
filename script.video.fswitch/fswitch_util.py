@@ -384,11 +384,11 @@ def setDisplayMode(newOutputMode):
                     videoFileName, videoFPSValue = getSourceFPS()
                     videoFileNameCheck = videoFileName.lower().replace('_','.').replace('-','.').replace(' ','.')
                     if "3d." in videoFileNameCheck:
-                        if ".sbs." in videoFileNameCheck or ".hsbs." in videoFileNameCheck:
+                        if ".sbs" in videoFileNameCheck or ".hsbs." in videoFileNameCheck:
                             mode3D = '4'
-                        elif ".tab." in videoFileNameCheck or ".ou." in videoFileNameCheck:
+                        elif ".tab" in videoFileNameCheck or ".ou." in videoFileNameCheck:
                             mode3D = '2'
-                        elif ".htab." in videoFileNameCheck or ".hou." in videoFileNameCheck:
+                        elif ".htab" in videoFileNameCheck or ".hou." in videoFileNameCheck:
                             mode3D = '2'
                     
                     # check osSDK for workaround Android 7.0
