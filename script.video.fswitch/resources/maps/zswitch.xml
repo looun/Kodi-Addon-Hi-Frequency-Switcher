@@ -1,1 +1,8 @@
-<keymap><global><keyboard><key id="61490">runaddon(script.frequency.switcher,hipqtools)</key><key id="61489">runaddon(script.frequency.switcher,info)</key></keyboard></global></keymap>
+<keymap>
+    <global>
+        <keyboard>
+            <key id="61490">runaddon(script.frequency.switcher,hipqtools)</key>
+            <key id="61489">runaddon(script.frequency.switcher,info)</key>
+        </keyboard>
+    </global>
+</keymap>

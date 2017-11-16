@@ -1,80 +1,83 @@
-v 3.5.9.4
+v3.6.0
+- version bummped
+
+v3.5.9.4
 - small fix
 
-v 3.5.9.3
+v3.5.9.3
 - quick fix HiMedia FW v2.0.4
 
-v 3.5.9.2
+v3.5.9.2
 - small fix
 
-v 3.5.9.1
+v3.5.9.1
 - fix regression Andoid 5.1.1
 
-v 3.5.9
+v3.5.9
 - improve for f/w 2.0.3 Android 7.0
 - part fix for SPMC after updated Phyton 31032017
 
-v 3.5.8
+v3.5.8
 - add 3D autoswitch base on filename (http://kodi.wiki/view/3D)
 (only if install with run_me.bat)
 
-v 3.5.7
+v3.5.7
 - fix not switch for add-on in Kodi v17.0
 
-v 3.5.6
+v3.5.6
 - fix overwrite workaround Android 7.0 f/w
 
-v 3.5.5
+v3.5.5
 - fix DialogNotification Kodi v17.0
 
-v 3.5.4
+v3.5.4
 - remove from video add-on category
 - corected map key prev/next channel, chapter using pagedown/pageup remote buttons
 
-v 3.5.3
+v3.5.3
 - fix Players button label
 
-v 3.5.2
+v3.5.2
 - fix mpeg2 play with DVDPlayer
 
-v 3.5.1
+v3.5.1
 - add preliminary support Kodi v17.0
 - set nfs, http play with DVDPlayer SPMC/Kodi 16.1
 
-v 3.5
+v3.5
 - add service set mode 23.976 hz, 24 hz on playback stop
 
-v 3.4.3
+v3.4.3
 - add Remote Controll "default" mapping key
 - add Copy playercorefactory.xml
 
-v 3.4.2
+v3.4.2
 - fix compatibility with SPMC
 
-v 3.4.1
+v3.4.1
 - new logo
 
-v 3.4
+v3.4
 - compatibility with Q5/Q10 4K 3D:
   only h.264 720/1080 Hardware decoding 
 
-v 3.3.3
+v3.3.3
 - HiPQTools key map for PQSetting pop-up windows  gr_haha 
 
-v 3.3.2
+v3.3.2
 - bug fix
 - NEW debug info with system infromation
 
-v 3.3
+v3.3
 - addon compatibility with SPMC
 
-v 3.2 
+v3.2 
 - fix UHD issues
 
-v 3.0 beta
+v3.0 beta
 - add support for UHD resolution
 
-v 2.1
+v2.1
 - add support for: 23,976, 29.970, 59.940
 
 ------------------------------------------------------
@@ -113,4 +116,3 @@ v0.0.2
 
 v0.0.1
 - Unpublished dev version
-

@@ -24,3 +24,4 @@ def notifyQuickWarn(title, msg):
     if fsconfig.radioNotifyOn:
         notifyDialog = xbmcgui.Dialog()
         notifyDialog.notification(title, msg, xbmcgui.NOTIFICATION_WARNING, 400, False)
+

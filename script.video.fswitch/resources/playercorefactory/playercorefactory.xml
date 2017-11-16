@@ -1,23 +1,23 @@
 <playercorefactory>
 <players>
-		<player name="HimediaXBMCWrapper" type="ExternalPlayer" audio="false" video="true">
-			<filename>com.himedia.xbmcwrapper</filename>
-			<hidexbmc>true</hidexbmc>
-			<playcountminimumtime>1200</playcountminimumtime>
-		</player>
+        <player name="HimediaXBMCWrapper" type="ExternalPlayer" audio="false" video="true">
+            <filename>com.himedia.xbmcwrapper</filename>
+            <hidexbmc>true</hidexbmc>
+            <playcountminimumtime>1200</playcountminimumtime>
+        </player>
 </players>
 <rules action="prepend">
-<!-- 	<rule protocols="nfs|http" player="DVDPlayer"/> ! -->
-	<rule protocols="nfs|http" player="DVDPlayer" />
-	<rule filename="pvr.*.pvr" player="DVDPlayer"/>
-<!-- rule für divx-files - alternativ funktioniert auch DVDPlayer  ! -->		
-	<rule name="divx" videocodec="divx" player="HimediaXBMCWrapper"/>
-<!-- rule für xvid-files - alternativ funktioniert auch DVDPlayer  ! -->		
-	<rule name="xvid" videocodec="xvid" player="HimediaXBMCWrapper"/>
-	<rule filename=".*.3D.*|.*.3D.iso|3D.*" player="HimediaXBMCWrapper"/>
-	<rule filetypes="iso|bdmv|mpls|m2ts" player="HimediaXBMCWrapper"/>
-<!-- 	<rule filetypes="mkv|avi|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/> ! -->
-	<rule filetypes="mkv|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/>
-	<rule video="true" player="DVDPlayer"/>
-	</rules>
+<!--     <rule protocols="nfs|http" player="DVDPlayer"/> ! -->
+    <rule protocols="nfs|http" player="DVDPlayer" />
+    <rule filename="pvr.*.pvr" player="DVDPlayer"/>
+<!-- rule für divx-files - alternativ funktioniert auch DVDPlayer  ! -->
+    <rule name="divx" videocodec="divx" player="HimediaXBMCWrapper"/>
+<!-- rule für xvid-files - alternativ funktioniert auch DVDPlayer  ! -->
+    <rule name="xvid" videocodec="xvid" player="HimediaXBMCWrapper"/>
+    <rule filename=".*.3D.*|.*.3D.iso|3D.*" player="HimediaXBMCWrapper"/>
+    <rule filetypes="iso|bdmv|mpls|m2ts" player="HimediaXBMCWrapper"/>
+<!--     <rule filetypes="mkv|avi|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/> ! -->
+    <rule filetypes="mkv|strm|mov|flv|mp4|webm|3gp" player="DVDPlayer"/>
+    <rule video="true" player="DVDPlayer"/>
+    </rules>
 </playercorefactory>

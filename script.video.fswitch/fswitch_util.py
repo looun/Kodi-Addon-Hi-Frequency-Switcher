@@ -15,21 +15,19 @@ def getSourceFPS():
     refVideoOpen = 'NOTICE: DVDPlayer: Opening: '
     refVideoFPSstart = 'NOTICE:  fps: '
     refVideoFPSend = ', pwidth: '
-    
+
     # initialize return values
     videoFileName = None
     videoFPSValue = None
     
     # get location of log file
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-        logFileName = xbmc.translatePath('special://temp') + xbmc.translatePath('special://temp')[xbmc.translatePath('special://temp').find('files')+7:xbmc.translatePath('special://temp').find('temp')].replace('/','') + '.log'
-
-    elif fsconfig.osPlatform == 'Windows 7':
+    if fsconfig.osPlatform[0:7] == 'Windows':
         logFileName = xbmc.translatePath('special://home') + xbmc.translatePath('special://home')[xbmc.translatePath('special://home').find('files')+7:xbmc.translatePath('special://home').find('temp')].replace('/','') + '.log'
-    
+    elif fsconfig.osPlatform[0:13] == 'HiSTBAndroidV':
+        logFileName = xbmc.translatePath('special://temp') + xbmc.translatePath('special://temp')[xbmc.translatePath('special://temp').find('files')+7:xbmc.translatePath('special://temp').find('temp')].replace('/','') + '.log'
     else:
         return videoFileName, videoFPSValue
-    
+
     # wait 0.40 second for log file to update (with debug on W7: 0.35 not quite long enough for some files)
     xbmc.sleep(400)
     
@@ -115,27 +113,34 @@ def getSourceFPS():
         videoFPSValue = xbmc.getInfoLabel('Player.Process(VideoFps)')
         videoFileName = xbmc.getInfoLabel('Player.Filenameandpath')
 
+    # only save FPS if not 0.000 (seen on one dvd-iso)
+    if videoFPSValue != '0.000':
         # save FPS for use in setDisplayModeAuto
         fsconfig.lastDetectedFps = videoFPSValue
         fsconfig.lastDetectedFile = videoFileName
         fsconfigutil.saveLastDetectedFps()
+    else:
+        videoFPSValue = None
 
+    # xbmc.log("MyNOTICE = videoFPSValue : " + videoFPSValue)
     return videoFileName, videoFPSValue
 
 def getPlatformType():
 # function for getting platform type
 
     osPlatform = sys.platform
-    
+
     if osPlatform == 'win32':
         osVariant = platform.system() + ' ' + platform.release()
 
     elif xbmc.getCondVisibility('system.platform.linux') and xbmc.getCondVisibility('system.platform.android'):
-        productBrand = subprocess.Popen(['getprop', 'ro.product.brand'], stdout=subprocess.PIPE).communicate()[0].strip()
-        productDevice = subprocess.Popen(['getprop', 'ro.product.device'], stdout=subprocess.PIPE).communicate()[0].strip()
-        osSDK = subprocess.Popen(['getprop', 'ro.build.version.sdk'], stdout=subprocess.PIPE).communicate()[0].strip()
-        osVariant = productBrand + ' ' + productDevice
-        
+        try:
+            productBrand = subprocess.Popen(['getprop', 'ro.product.brand'], stdout=subprocess.PIPE).communicate()[0].strip()
+            productDevice = subprocess.Popen(['getprop', 'ro.product.device'], stdout=subprocess.PIPE).communicate()[0].strip()
+            osSDK = subprocess.Popen(['getprop', 'ro.build.version.sdk'], stdout=subprocess.PIPE).communicate()[0].strip()
+            osVariant = productBrand + ' ' + productDevice
+        except:
+            osVariant = platform.system() + ' ' + platform.release()
     else:
         osVariant = 'unsupported'
     
@@ -225,15 +230,19 @@ def getDisplayModeFileStatus():
     
     modeFileAndroid = "/proc/msp/disp1"
     modeFileWindows = "d:\\x8mode.txt"
- 
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
-        modeFile = modeFileAndroid
-    elif fsconfig.osPlatform == 'Windows 7':
+
+    if fsconfig.osPlatform[0:7] == 'Windows':
         modeFile = modeFileWindows 
+    elif fsconfig.osPlatform[0:13] == 'HiSTBAndroidV':
+        modeFile = modeFileAndroid
+        try:
+            os.system('chmod 666 > /proc/msp/hdmi0')
+        except:
+            pass
     else:
         fileStatus = 'Unsupported platform'
         return modeFile, fileStatus
-      
+
     # check file exists
     if os.path.isfile(modeFile):
         # check file is writable
@@ -345,7 +354,7 @@ def setDisplayMode(newOutputMode):
         # get new frequency
         freqSplit = newOutputMode.find('-') + 1
         newFreq = newOutputMode[freqSplit:len(newOutputMode)]
-    
+
         # current output mode is the same as new output mode
         if currentOutputMode == newOutputMode:
             setModeStatus = 'Frequency already set to ' + newFreq 
@@ -361,7 +370,6 @@ def setDisplayMode(newOutputMode):
              
             # new resolution is the same as the current resolution
             else: 
-             
                 fsconfigutil.loadLastFreqChangeSetting()
              
                 # check that at least 4 seconds has elapsed since the last frequency change
@@ -407,7 +415,7 @@ def setDisplayMode(newOutputMode):
                     
                     setModeStatus = 'Frequency changed to ' + newFreq
                     statusType = 'info'
-     
+
     return setModeStatus, statusType
 
 def getCurrentFPS():
