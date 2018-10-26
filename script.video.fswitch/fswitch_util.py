@@ -156,7 +156,7 @@ def getDisplayMode():
     modeFileAndroid = "/proc/msp/disp1"
     modeFileWindows = "d:\\x8mode.txt"
  
-    if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200' or fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+    if fsconfig.osPlatform[0:13] == 'HiSTBAndroidV':
         modeFile = modeFileAndroid
     elif fsconfig.osPlatform == 'Windows 7':
         modeFile = modeFileWindows 
@@ -171,9 +171,9 @@ def getDisplayMode():
             with open(modeFile, 'r') as modeFileHandle:      
                 # hisiliconMode = modeFileHandle.readline().strip()
                 hisiliconMode = modeFileHandle.read().splitlines()
-                if fsconfig.osPlatform == 'HiSTBAndroidV5 Hi3798CV100':
+                if fsconfig.osPlatform[0:14] == 'HiSTBAndroidV5':
                     hisiliconMode = hisiliconMode[2].split(":")[1].split("/")[0].replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower()
-                if fsconfig.osPlatform == 'HiSTBAndroidV6 Hi3798CV200':
+                if fsconfig.osPlatform[0:14] == 'HiSTBAndroidV6':
                     hisiliconMode = hisiliconMode[3].split(":")[1].split("/")[0].replace("0_","0P").replace("*","x").replace("3840x","").replace("1920x","").replace("1280x","").replace("_",".").lower()
                 print hisiliconMode 
                 # convert HISILICON output mode to more descriptive mode
@@ -462,6 +462,8 @@ def getCurrentFPS():
                 setModeStatus = videoFPSValue
                 statusType = 'ok'
     
+            setModeStatus = videoFPSValue
+            statusType = 'ok'
     return setModeStatus, statusType
 
 def setDisplayModeAuto():
